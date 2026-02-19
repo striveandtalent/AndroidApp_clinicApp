@@ -29,29 +29,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded"
         android:elevation="16dp"
         app:blurOverlayColor="@color/colorOverlay">
 
-        <!--<LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_search_round"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/search"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="#CCFFFFFF" />
+
+            <EditText
+                android:id="@+id/searchInput"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/radius"
-                android:textSize="12sp" />
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/search_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:textColor="@android:color/white"
+                android:textColorHint="#CCFFFFFF" />
 
-            <SeekBar
-                android:id="@+id/radiusSeekBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp" />
-
-        </LinearLayout>-->
+        </LinearLayout>
     </eightbitlab.com.blurview.BlurView>
 
 
