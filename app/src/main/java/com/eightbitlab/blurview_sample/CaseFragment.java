@@ -1,5 +1,7 @@
 package com.eightbitlab.blurview_sample;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -26,8 +28,15 @@ public class CaseFragment extends Fragment {
 
         BlurView topBlurView = view.findViewById(R.id.topBlurView);
         BlurTarget target = requireActivity().findViewById(R.id.target);
+        if (topBlurView == null || target == null) {
+            return;
+        }
 
-        final Drawable windowBackground = requireActivity().getWindow().getDecorView().getBackground();
+        Drawable windowBackground = requireActivity().getWindow().getDecorView().getBackground();
+        if (windowBackground == null) {
+            windowBackground = new ColorDrawable(Color.TRANSPARENT);
+        }
+
         topBlurView.setupWith(target)
                 .setFrameClearDrawable(windowBackground)
                 .setBlurRadius(25f);

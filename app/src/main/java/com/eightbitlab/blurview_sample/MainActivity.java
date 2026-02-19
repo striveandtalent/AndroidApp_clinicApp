@@ -1,5 +1,7 @@
 package com.eightbitlab.blurview_sample;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -54,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupBlurView() {
         final float radius = 25f;
-        final Drawable windowBackground = getWindow().getDecorView().getBackground();
+        Drawable windowBackground = getWindow().getDecorView().getBackground();
+        if (windowBackground == null) {
+            windowBackground = new ColorDrawable(Color.TRANSPARENT);
+        }
 
         bottomBlurView.setupWith(target)
                 .setFrameClearDrawable(windowBackground)
