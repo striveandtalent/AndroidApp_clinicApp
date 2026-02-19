@@ -59,6 +59,7 @@
         android:layout_marginHorizontal="12dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/bg_search_round"
+        android:clipToOutline="true"
         android:elevation="16dp"
         app:blurOverlayColor="@color/colorSearchBlurOverlay">
 

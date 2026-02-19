@@ -1,11 +1,13 @@
 package com.eightbitlab.blurview_sample;
 
 import android.graphics.Color;
+import android.graphics.Outline;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +38,17 @@ public class CaseFragment extends Fragment {
         if (windowBackground == null) {
             windowBackground = new ColorDrawable(Color.TRANSPARENT);
         }
+
+        topBlurView.setClipToOutline(true);
+        topBlurView.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view1, Outline outline) {
+                if (view1.getBackground() != null) {
+                    view1.getBackground().getOutline(outline);
+                }
+                outline.setAlpha(1f);
+            }
+        });
 
         topBlurView.setupWith(target)
                 .setFrameClearDrawable(windowBackground)
