@@ -5,5 +5,5 @@
     <string name="slogan">Strong slogan here</string>
     <string name="radius">Radius</string>
     <string name="search">搜索</string>
-    <string name="search_hint">搜索病例、医生或关键字</string>
+    <string name="search_hint">搜索病历、姓名或手机号</string>
 </resources>
