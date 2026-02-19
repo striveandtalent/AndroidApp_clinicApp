@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.eightbitlab.blurview_sample.MainActivity">
 
+    <!-- Activity 级采样容器：用于底部导航 blur，从 ViewPager 内容实时采样 -->
     <eightbitlab.com.blurview.BlurTarget
         android:id="@+id/target"
         android:layout_width="match_parent"
@@ -19,6 +20,7 @@
 
     </eightbitlab.com.blurview.BlurTarget>
 
+    <!-- 底部导航玻璃态：自身不被模糊，模糊的是它下方 target 的内容 -->
     <eightbitlab.com.blurview.BlurView
         android:id="@+id/bottomBlurView"
         android:layout_width="175dp"

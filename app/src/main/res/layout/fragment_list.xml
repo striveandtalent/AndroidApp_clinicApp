@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- 病例页内采样容器：只采样当前页面内容，避免跨页面/跨层级问题 -->
     <eightbitlab.com.blurview.BlurTarget
         android:id="@+id/caseBlurTarget"
         android:layout_width="match_parent"
@@ -52,6 +53,7 @@
 
     </eightbitlab.com.blurview.BlurTarget>
 
+    <!-- 顶部搜索框 BlurView：覆盖在内容之上，视觉上是玻璃态搜索栏 -->
     <eightbitlab.com.blurview.BlurView
         android:id="@+id/topBlurView"
         android:layout_width="match_parent"
