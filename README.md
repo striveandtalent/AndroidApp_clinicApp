@@ -1,1 +1,1 @@
-使用了BlurView，添加类IOS高斯模糊效果
+使用了BlurView，添加类IOS高斯模糊效果，网址：https://gitcode.com/gh_mirrors/bl/BlurView/?utm_source=gitcode_aigc_v1_t0&index=top&type=card&&uuid_tt_dd=10_18578809370-1771473763258-958980&isLogin=9&from_id=138702600&from_link=bbdd49586e65dd836040327cfac2e4e5#%E5%9C%86%E8%A7%92
