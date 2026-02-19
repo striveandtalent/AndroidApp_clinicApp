@@ -5,8 +5,7 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.eightbitlab.blurview_sample.MainActivity"
-    android:background="@drawable/lines">
+    tools:context="com.eightbitlab.blurview_sample.MainActivity">
 
     <!--将要模糊的内容包装到 BlurTarget 中，并将其传递给 BlurView 的 setupWith() 方法-->
     <eightbitlab.com.blurview.BlurTarget
@@ -29,61 +28,50 @@
         android:id="@+id/topBlurView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/bg_search_round"
+        android:layout_marginHorizontal="8dp"
+        android:background="@drawable/rounded"
         android:elevation="16dp"
-        app:blurOverlayColor="@color/colorSearchBlurOverlay">
+        app:blurOverlayColor="@color/colorOverlay">
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="12dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:contentDescription="@string/search"
-                android:src="@android:drawable/ic_menu_search"
-                app:tint="#000000" />
-
-            <EditText
-                android:id="@+id/searchInput"
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:hint="@string/search_hint"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingStart="10dp"
-                android:textColor="#000000"
-                android:textColorHint="#808A87" />
+                android:text="@string/radius"
+                android:textSize="12sp" />
 
-        </LinearLayout>
+            <SeekBar
+                android:id="@+id/radiusSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp" />
+
+        </LinearLayout>-->
     </eightbitlab.com.blurview.BlurView>
 
 
     <eightbitlab.com.blurview.BlurView
         android:id="@+id/bottomBlurView"
         android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="25dp"
         android:background="@drawable/bg_bottom_nav_round"
         android:clipToOutline="true"
         android:elevation="10dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="25dp"
         app:blurOverlayColor="@color/colorOverlay">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_tab_height"
-            android:layout_gravity="center"
-            android:background="@android:color/transparent" />
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"/>
 
     </eightbitlab.com.blurview.BlurView>
 
