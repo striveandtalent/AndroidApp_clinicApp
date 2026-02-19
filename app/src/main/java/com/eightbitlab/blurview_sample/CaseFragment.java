@@ -27,7 +27,7 @@ public class CaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         BlurView topBlurView = view.findViewById(R.id.topBlurView);
-        BlurTarget target = requireActivity().findViewById(R.id.target);
+        BlurTarget target = view.findViewById(R.id.caseBlurTarget);
         if (topBlurView == null || target == null) {
             return;
         }
