@@ -36,6 +36,8 @@ public class CaseFragment extends Fragment {
     private android.widget.EditText etSearch;
     private RecyclerView rvResult;
     private SimpleStringAdapter adapter;
+    private TextWatcher searchWatcher;
+    private View.OnFocusChangeListener searchFocusListener;
 
     public CaseFragment() {
         super(R.layout.fragment_list);
@@ -73,7 +75,7 @@ public class CaseFragment extends Fragment {
         searchBlurView.setClipToOutline(true);
 
         // 4) 对焦动画：中间 -> 顶部
-        etSearch.setOnFocusChangeListener((v, hasFocus) -> {
+        searchFocusListener = (v, hasFocus) -> {
             if (hasFocus) {
                 moveSearchToTop();
                 rvResult.setVisibility(View.VISIBLE);
@@ -81,10 +83,11 @@ public class CaseFragment extends Fragment {
                 // 你想失焦回中间就打开这一句
                 // moveSearchToCenter();
             }
-        });
+        };
+        etSearch.setOnFocusChangeListener(searchFocusListener);
 
         // 5) 输入防抖搜索
-        etSearch.addTextChangedListener(new TextWatcher() {
+        searchWatcher = new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void afterTextChanged(Editable s) {}
 
@@ -94,6 +97,8 @@ public class CaseFragment extends Fragment {
 
                 final String q = s.toString().trim();
                 task = () -> {
+                    if (!isAdded() || adapter == null) return;
+
                     if (q.isEmpty()) {
                         adapter.submitList(Collections.emptyList());
                         return;
@@ -110,14 +115,40 @@ public class CaseFragment extends Fragment {
                 };
                 handler.postDelayed(task, 300);
             }
-        });
+        };
+        etSearch.addTextChangedListener(searchWatcher);
 
         // 启动就显示搜索框（默认就在中间，不需要额外处理）
         // 如需启动直接弹出键盘：
         // etSearch.requestFocus(); showKeyboard(etSearch);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (task != null) {
+            handler.removeCallbacks(task);
+            task = null;
+        }
+        if (etSearch != null) {
+            if (searchWatcher != null) {
+                etSearch.removeTextChangedListener(searchWatcher);
+            }
+            if (searchFocusListener != null) {
+                etSearch.setOnFocusChangeListener(null);
+            }
+        }
+        searchWatcher = null;
+        searchFocusListener = null;
+        rvResult = null;
+        etSearch = null;
+        searchBlurView = null;
+        root = null;
+        adapter = null;
+    }
+
     private void moveSearchToTop() {
+        if (root == null) return;
         TransitionManager.beginDelayedTransition(root);
 
         ConstraintSet set = new ConstraintSet();
@@ -132,6 +163,7 @@ public class CaseFragment extends Fragment {
     }
 
     private void moveSearchToCenter() {
+        if (root == null || rvResult == null || adapter == null) return;
         TransitionManager.beginDelayedTransition(root);
 
         ConstraintSet set = new ConstraintSet();
