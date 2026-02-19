@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         SECOND("病例") {
             @Override
             Fragment getFragment() {
-                return new ListFragment();
+                return new CaseFragment();
             }
         },
         THIRD("设置") {
