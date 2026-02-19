@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.eightbitlab.blurview_sample.MainActivity">
+
+    <!--将要模糊的内容包装到 BlurTarget 中，并将其传递给 BlurView 的 setupWith() 方法-->
+    <eightbitlab.com.blurview.BlurTarget
+        android:id="@+id/target"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </eightbitlab.com.blurview.BlurTarget>
+
+    <!--BlurView 不会把自己的子 View 模糊掉，
+    而是把“它下面的内容”截取下来做模糊，然后把模糊结果当作背景来画；
+    同时 setupWith() 需要一个“要被截取/模糊的根内容容器”，
+    demo 里用的就是 BlurTarget-->
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/topBlurView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:background="@drawable/rounded"
+        android:elevation="16dp"
+        app:blurOverlayColor="@color/colorOverlay">
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radius"
+                android:textSize="12sp" />
+
+            <SeekBar
+                android:id="@+id/radiusSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp" />
+
+        </LinearLayout>-->
+    </eightbitlab.com.blurview.BlurView>
+
+
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/bottomBlurView"
+        android:layout_width="175dp"
+        android:background="@drawable/bg_bottom_nav_round"
+        android:clipToOutline="true"
+        android:elevation="10dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="25dp"
+        app:blurOverlayColor="@color/colorOverlay">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_tab_height"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"/>
+
+    </eightbitlab.com.blurview.BlurView>
+
+</FrameLayout>
