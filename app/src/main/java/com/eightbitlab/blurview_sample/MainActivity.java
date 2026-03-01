@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.eightbitlab.blurview_sample.PatientDetail.CaseFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import eightbitlab.com.blurview.BlurTarget;
