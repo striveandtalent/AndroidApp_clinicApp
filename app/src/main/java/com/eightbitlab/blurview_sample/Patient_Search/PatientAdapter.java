@@ -1,4 +1,5 @@
 package com.eightbitlab.blurview_sample.Patient_Search;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.eightbitlab.blurview_sample.PatientDetail.PatientModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.VH> {
 
     public interface OnItemClick {
@@ -43,12 +45,21 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.VH> {
     public void onBindViewHolder(@NonNull VH holder, int position) {
         PatientModel item = data.get(position);
 
-        holder.tvTitle.setText((item.name == null ? "" : item.name)
-                + (item.phone == null ? "" : ("  " + item.phone)));
+        /*holder.tvTitle.setText((item.name == null ? "" : item.name)
+                + (item.phone == null ? "" : ("  " + item.phone)));*/
+
+
+        holder.tvName.setText(nvl(item.name));
+        holder.tvPhone.setText(nvl(item.phone));
+
 
         holder.itemView.setOnClickListener(v -> {
             if (onItemClick != null) onItemClick.onClick(item);
         });
+    }
+
+    private String nvl(String s) {
+        return s == null ? "" : s;
     }
 
     @Override
@@ -57,10 +68,15 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.VH> {
     }
 
     static class VH extends RecyclerView.ViewHolder {
-        TextView tvTitle;
+        View itemRoot;
+        TextView tvName;
+        TextView tvPhone;
+
         VH(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
+            itemRoot = itemView.findViewById(R.id.itemRoot);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvPhone = itemView.findViewById(R.id.tvPhone);
         }
     }
 }
