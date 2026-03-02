@@ -20,7 +20,7 @@ public class ApiClient {
 
         Retrofit retrofit = new Retrofit.Builder()
                 //后端地址（注意必须以 / 结尾）
-                //.baseUrl("http://10.0.2.2:5219/")//10.0.2.2代表模拟器访问本机固定本地地址
+//                .baseUrl("http://10.0.2.2:5219/")
                 .baseUrl("http://10.63.237.71:6123/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())

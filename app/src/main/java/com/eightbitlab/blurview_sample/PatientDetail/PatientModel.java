@@ -2,6 +2,8 @@ package com.eightbitlab.blurview_sample.PatientDetail;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class PatientModel {
 
     @SerializedName(value = "patientId", alternate = {"PatientId", "PatientID"})
@@ -13,7 +15,7 @@ public class PatientModel {
     @SerializedName(value = "gender", alternate = {"Gender"})
     public String gender;
     @SerializedName(value = "age", alternate = {"Age"})
-    public String age;
+    public Integer age;
     @SerializedName(value = "birthday", alternate = {"Birthday"})
     public String birthday;
     @SerializedName(value = "phone", alternate = {"Phone"})

@@ -1,5 +1,6 @@
 package com.eightbitlab.blurview_sample.VisitDetail;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.eightbitlab.blurview_sample.PatientDetail.VisitDetailModel;
@@ -18,6 +20,11 @@ import com.eightbitlab.blurview_sample.net.ApiClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import android.content.Intent;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
 public class VisitDetailActivity extends AppCompatActivity {
 
@@ -44,6 +51,13 @@ public class VisitDetailActivity extends AppCompatActivity {
     // Section 4: 记录信息
     private TextView tvCreateTime;
     private TextView tvUpdateTime;
+
+    //点击病历详情的卡片做跳转
+    private ActivityResultLauncher<Intent> editLauncher;
+    static final String EXTRA_VISIT_NO = "visitNo";
+    static final String EXTRA_SECTION = "section";
+    static final int SECTION_ILLNESS = 1;   // 病情与方案
+    private static final int SECTION_RELATION = 2;  // 沟通与预后
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +93,28 @@ public class VisitDetailActivity extends AppCompatActivity {
             return;
         }
 
+        editLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        // 编辑保存成功后，回到详情页重新拉取刷新
+                        loadVisitDetail(visitNo.trim());
+                    }
+                }
+        );
+
+        // 绑定卡片点击（XML 里 id 就是 cardIllness/cardRelation）
+        findViewById(R.id.cardIllness).setOnClickListener(v -> openEdit(SECTION_ILLNESS));
+        findViewById(R.id.cardRelation).setOnClickListener(v -> openEdit(SECTION_RELATION));
+
         loadVisitDetail(visitNo.trim());
     }
-
+    private void openEdit(int section) {
+        Intent it = new Intent(this, VisitEditActivity.class);
+        it.putExtra(EXTRA_VISIT_NO, visitNo.trim());
+        it.putExtra(EXTRA_SECTION, section);
+        editLauncher.launch(it);
+    }
     private void loadVisitDetail(String visitNo) {
         ApiClient.api().getVisitByVisitNo(visitNo).enqueue(new Callback<ReturnInfo<VisitDetailModel>>() {
             @Override
@@ -146,11 +179,12 @@ public class VisitDetailActivity extends AppCompatActivity {
         return v.isEmpty() ? "（暂无）" : v;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private String fmtTime(String s) {
         // 你项目里 TimeFmt.fmt(...) 已经在列表里用过了:contentReference[oaicite:3]{index=3}
         // 这里做个保护：解析失败就原样显示
         try {
-            return TimeFmt.fmt(s);
+            return TimeFmt.fmtDateOnly(s);
         } catch (Exception e) {
             return s;
         }

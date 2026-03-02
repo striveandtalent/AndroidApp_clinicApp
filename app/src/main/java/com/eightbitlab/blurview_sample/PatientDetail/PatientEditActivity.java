@@ -15,11 +15,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.DatePickerDialog;
+
+import java.util.Calendar;
+import java.util.Locale;
+
 public class PatientEditActivity extends AppCompatActivity {
     private String patientId;
 
-    private EditText etName,etGender,etAge,etBirthday, etPhone,etIdCard, etAddress, etAllergy, etMedicalHistory, etMasterPlan;//需要更新档案的字段
+    private EditText etName, etGender, etAge, etBirthday, etPhone, etIdCard, etAddress, etAllergy, etMedicalHistory, etMasterPlan;//需要更新档案的字段
     private Button btnSave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +36,10 @@ public class PatientEditActivity extends AppCompatActivity {
         etName = findViewById(R.id.etName);
         etGender = findViewById(R.id.etGender);
         etAge = findViewById(R.id.etAge);
+
         etBirthday = findViewById(R.id.etBirthday);
+        setupBirthdayPicker();
+
         etPhone = findViewById(R.id.etPhone);
         etIdCard = findViewById(R.id.etIdCard);
         etAddress = findViewById(R.id.etAddress);
@@ -44,6 +53,51 @@ public class PatientEditActivity extends AppCompatActivity {
         loadPatientDetail(patientId);
 
         btnSave.setOnClickListener(v -> save());
+    }
+
+    private void setupBirthdayPicker() {
+        // 禁止手输，只允许点选
+        etBirthday.setFocusable(false);
+        etBirthday.setFocusableInTouchMode(false);
+        etBirthday.setCursorVisible(false);
+        etBirthday.setLongClickable(false);
+
+        etBirthday.setOnClickListener(v -> showBirthdayPicker());
+    }
+
+    private void showBirthdayPicker() {
+        final Calendar cal = Calendar.getInstance();
+
+        // 如果已经有值（yyyy-MM-dd），用它作为默认选中日期
+        String cur = etBirthday.getText().toString().trim();
+        if (cur.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            try {
+                int y = Integer.parseInt(cur.substring(0, 4));
+                int m = Integer.parseInt(cur.substring(5, 7)) - 1;
+                int d = Integer.parseInt(cur.substring(8, 10));
+                cal.set(y, m, d);
+            } catch (Exception ignored) {
+            }
+        }
+
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                this,
+                (view, y, m, d) -> {
+                    // 回填 yyyy-MM-dd
+                    String value = String.format(Locale.US, "%04d-%02d-%02d", y, m + 1, d);
+                    etBirthday.setText(value);
+                },
+                year, month, day
+        );
+
+        // 限制不能选未来日期（可选，但很建议）
+        dialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+        dialog.show();
     }
 
     //档案编辑更新页也要重新拉取最新的数据
@@ -60,8 +114,15 @@ public class PatientEditActivity extends AppCompatActivity {
                 //加载数据
                 etName.setText(nvl(p.name));
                 etGender.setText(nvl(p.gender));
-                etAge.setText(nvl(p.age));
-                etBirthday.setText(nvl(p.birthday));
+                etAge.setText(nvl(String.valueOf(p.age)));
+
+                //etBirthday.setText(nvl(p.birthday));
+                String bd = nvl(p.birthday);
+                if (!bd.isEmpty()) {
+                    int t = bd.indexOf('T');
+                    if (t > 0) bd = bd.substring(0, t);  // 2020-03-24T00:00:00 -> 2020-03-24
+                }
+                etBirthday.setText(bd);
                 etPhone.setText(nvl(p.phone));
                 etIdCard.setText(nvl(p.idCard));
                 etAddress.setText(nvl(p.address));
@@ -81,8 +142,13 @@ public class PatientEditActivity extends AppCompatActivity {
         PatientModel req = new PatientModel();
         req.name = etName.getText().toString().trim();
         req.gender = etGender.getText().toString().trim();
-        req.age = etAge.getText().toString().trim();
-        req.birthday = etBirthday.getText().toString().trim();
+
+        String ageStr = etAge.getText().toString().trim();
+        req.age = ageStr.isEmpty() ? null : Integer.parseInt(ageStr);
+
+        String bd = etBirthday.getText().toString().trim();
+        req.birthday = bd.isEmpty() ? null : bd;
+
         req.phone = etPhone.getText().toString().trim();
         req.idCard = etIdCard.getText().toString().trim();
         req.address = etAddress.getText().toString().trim();
@@ -111,5 +177,7 @@ public class PatientEditActivity extends AppCompatActivity {
         });
     }
 
-    private String nvl(String s) { return s == null ? "" : s; }
+    private String nvl(String s) {
+        return s == null ? "" : s;
+    }
 }

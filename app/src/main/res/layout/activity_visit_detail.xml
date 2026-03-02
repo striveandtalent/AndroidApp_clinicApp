@@ -13,15 +13,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- 顶部信息卡：病历号 + 就诊时间 -->
+        <!-- 顶部信息卡（更像 header） -->
         <LinearLayout
             android:id="@+id/cardHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@drawable/bg_card"
             android:padding="16dp"
-            android:orientation="vertical"
-            android:elevation="2dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvPageTitle"
@@ -30,7 +29,7 @@
                 android:text="病历详情"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#1F2937" />
+                android:textColor="#111827" />
 
             <TextView
                 android:id="@+id/tvVisitNo"
@@ -52,34 +51,50 @@
                 android:textColor="#6B7280" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="12dp" />
+        <View android:layout_width="match_parent" android:layout_height="12dp" />
 
-        <!-- 板块 1：病情与方案（主诉/现病史/治疗方案） -->
+        <!-- 板块 1：病情与方案（可点击） -->
         <LinearLayout
             android:id="@+id/cardIllness"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@drawable/bg_card"
             android:padding="16dp"
             android:orientation="vertical"
-            android:elevation="2dp">
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
 
+            <!-- 标题行：左标题 + 右箭头 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvSection1Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="病情与方案"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#111827" />
+
+                <TextView
+                    android:id="@+id/tvArrow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="›"
+                    android:textSize="22sp"
+                    android:textColor="#9CA3AF" />
+            </RelativeLayout>
+
+
+
+            <!-- 详情展示（仍用你原来的 id） -->
             <TextView
-                android:id="@+id/tvSection1Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="病情与方案"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="#111827" />
-
-            <!-- 主诉 -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:text="主诉"
                 android:textSize="13sp"
                 android:textColor="#6B7280" />
@@ -89,12 +104,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="（暂无）"
+                android:text=""
                 android:textSize="15sp"
                 android:textColor="#111827"
                 android:lineSpacingExtra="3dp" />
 
-            <!-- 现病史 -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,12 +122,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="（暂无）"
+                android:text=""
                 android:textSize="15sp"
                 android:textColor="#111827"
                 android:lineSpacingExtra="3dp" />
 
-            <!-- 治疗方案 -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -127,40 +140,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="（暂无）"
+                android:text=""
                 android:textSize="15sp"
                 android:textColor="#111827"
                 android:lineSpacingExtra="3dp" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="12dp" />
+        <View android:layout_width="match_parent" android:layout_height="12dp" />
 
-        <!-- 板块 2：沟通与预后（配合/医患关系/预测说明） -->
+        <!-- 板块 2：沟通与预后（可点击） -->
         <LinearLayout
             android:id="@+id/cardRelation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@drawable/bg_card"
             android:padding="16dp"
             android:orientation="vertical"
-            android:elevation="2dp">
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvSection2Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="沟通与预后"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#111827" />
+
+                <TextView
+                    android:id="@+id/tvArrow2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="›"
+                    android:textSize="22sp"
+                    android:textColor="#9CA3AF" />
+            </RelativeLayout>
+
+
 
             <TextView
-                android:id="@+id/tvSection2Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="沟通与预后"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="#111827" />
-
-            <!-- 患者配合程度 -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:text="患者配合程度"
                 android:textSize="13sp"
                 android:textColor="#6B7280" />
@@ -170,12 +197,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="（暂无）"
+                android:text=""
                 android:textSize="15sp"
                 android:textColor="#111827"
                 android:lineSpacingExtra="3dp" />
 
-            <!-- 医患关系情况 -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -189,12 +215,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="（暂无）"
+                android:text=""
                 android:textSize="15sp"
                 android:textColor="#111827"
                 android:lineSpacingExtra="3dp" />
 
-            <!-- 预测发展说明 -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -208,46 +233,58 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="（暂无）"
+                android:text=""
                 android:textSize="15sp"
                 android:textColor="#111827"
                 android:lineSpacingExtra="3dp" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="12dp" />
+        <View android:layout_width="match_parent" android:layout_height="12dp" />
 
-        <!-- 板块 3：附件（后续你传图片） -->
+        <!-- 板块 3：附件（可点击） -->
         <LinearLayout
             android:id="@+id/cardAttachments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@drawable/bg_card"
             android:padding="16dp"
             android:orientation="vertical"
-            android:elevation="2dp">
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
 
-            <TextView
-                android:id="@+id/tvSection3Title"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="附件"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="#111827" />
+                android:layout_height="wrap_content">
 
-            <!-- 空状态提示（没图片时显示，有图片你可以隐藏它） -->
+                <TextView
+                    android:id="@+id/tvSection3Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="附件"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#111827" />
+
+                <TextView
+                    android:id="@+id/tvArrow3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="›"
+                    android:textSize="22sp"
+                    android:textColor="#9CA3AF" />
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/tvAttachmentEmpty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="暂无附件"
+                android:text="暂无附件，点击添加/查看"
                 android:textSize="13sp"
                 android:textColor="#6B7280" />
 
-            <!-- 预留容器：后续放 RecyclerView(横向缩略图) 或 Grid -->
             <FrameLayout
                 android:id="@+id/flAttachmentContainer"
                 android:layout_width="match_parent"
@@ -255,19 +292,16 @@
                 android:layout_marginTop="10dp" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="12dp" />
+        <View android:layout_width="match_parent" android:layout_height="12dp" />
 
-        <!-- 板块 4：记录信息（创建/更新时间） -->
+        <!-- 板块 4：记录信息（一般只读，也可不设点击） -->
         <LinearLayout
             android:id="@+id/cardMeta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@drawable/bg_card"
             android:padding="16dp"
-            android:orientation="vertical"
-            android:elevation="2dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvSection4Title"
@@ -282,7 +316,6 @@
                 android:id="@+id/tvCreateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:text="创建时间："
                 android:textSize="13sp"
                 android:textColor="#6B7280" />

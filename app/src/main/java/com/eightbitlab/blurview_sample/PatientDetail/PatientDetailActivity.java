@@ -1,6 +1,7 @@
 package com.eightbitlab.blurview_sample.PatientDetail;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.eightbitlab.blurview_sample.R;
 import com.eightbitlab.blurview_sample.ReturnInfo;
 import com.eightbitlab.blurview_sample.TimeFmt;
+import com.eightbitlab.blurview_sample.VisitDetail.VisitCreateActivity;
 import com.eightbitlab.blurview_sample.VisitDetail.VisitDetailActivity;
 import com.eightbitlab.blurview_sample.net.ApiClient;
 
@@ -36,6 +38,7 @@ public class PatientDetailActivity extends AppCompatActivity {
     private static final int REQ_EDIT_PATIENT = 1001;//对档案编辑页面的请求码
     private String patientId; // 把 patientId 提到成员变量，方便 onActivityResult 用
     private ActivityResultLauncher<Intent> editPatientLauncher;//接收档案编辑页返回数据用
+    private ActivityResultLauncher<Intent> createVisitLauncher;//接收新建病历页面返回的结果
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,19 @@ public class PatientDetailActivity extends AppCompatActivity {
         tvMasterPlan = findViewById(R.id.tvMasterPlan);
         tvPatientId = findViewById(R.id.tvPatientId);
 
+        //点击创建病历按钮事件
+        findViewById(R.id.btnAddVisitFab).setOnClickListener(v -> {
+            Intent it = new Intent(PatientDetailActivity.this, VisitCreateActivity.class);
+            it.putExtra("patientId", patientId);
+            createVisitLauncher.launch(it);
+        });
+        //处理创建病历页面的回调
+        createVisitLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK) {
+                // 创建成功，刷新病历列表
+                loadVisits(patientId);
+            }
+        });
 
         patientId = getIntent().getStringExtra("patientId");
         if (patientId == null || patientId.trim().isEmpty()) {
@@ -168,8 +184,10 @@ public class PatientDetailActivity extends AppCompatActivity {
                 tvPatientId.setText(safe(p.patientId));
                 tvName.setText(safe(p.name));
                 tvGender.setText(safe(p.gender));
-                tvAge.setText(safe(p.age));
-                tvBirthday.setText(TimeFmt.fmtDateOnly(safe(p.birthday)));
+                tvAge.setText(safe(String.valueOf(p.age)));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    tvBirthday.setText(TimeFmt.fmtDateOnly(safe(String.valueOf(p.birthday))));
+                }
                 tvPhone.setText(safe(p.phone));
                 tvIdCard.setText(safe(p.idCard));
                 tvAddress.setText(safe(p.address));

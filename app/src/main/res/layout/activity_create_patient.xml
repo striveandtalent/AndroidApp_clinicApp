@@ -1,91 +1,389 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="45dp">
+    android:background="#F3F7FF">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="10dp"
+        android:text="创建病人档案"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#111827"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        <EditText
-            android:id="@+id/etName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="姓名" />
-
-        <EditText
-            android:id="@+id/etGender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="性别" />
-
-        <EditText
-            android:id="@+id/etBirthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="出生日期" />
-        <EditText
-            android:id="@+id/etAge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="年龄" />
-
-        <EditText
-            android:id="@+id/etPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="电话" />
-
-        <EditText
-            android:id="@+id/etIdCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="身份证" />
-
-        <EditText
-            android:id="@+id/etAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="地址" />
-        <EditText
-            android:id="@+id/etAllergy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="过敏史" />
-        <EditText
-            android:id="@+id/etMedicalHistory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="既往病史" />
-        <EditText
-            android:id="@+id/etMasterPlan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="总体治疗方针" />
+    <ScrollView
+        android:id="@+id/svRoot"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:orientation="vertical">
 
-            <android.widget.Button
-                android:id="@+id/btnCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="取消" />
+            <!-- ============ 通用 label 样式（每个字段都用同一套） ============ -->
+            <!-- 说明：XML 里不能定义样式块，所以这里直接重复 TextView 属性 -->
 
-            <android.widget.Button
-                android:id="@+id/btnSave"
-                android:layout_width="wrap_content"
+            <!-- 卡片1：基础信息 -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="保存"
-                android:gravity="center"
-                android:layout_marginStart="12dp" />
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_card"
+                android:padding="14dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="基础信息"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="#111827"/>
+
+                <!-- 姓名 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="姓名"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"/>
+
+                <EditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="例如：张三"
+                    android:padding="12dp"
+                    android:inputType="textPersonName"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"/>
+
+                <!-- 性别 + 年龄 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <!-- 性别 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="性别"
+                            android:textSize="12sp"
+                            android:textColor="#6B7280"/>
+
+                        <EditText
+                            android:id="@+id/etGender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/bg_input"
+                            android:hint="男/女"
+                            android:padding="12dp"
+                            android:inputType="text"
+                            android:textColor="#111827"
+                            android:textColorHint="#9CA3AF"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="1dp"/>
+
+                    <!-- 年龄 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="年龄"
+                            android:textSize="12sp"
+                            android:textColor="#6B7280"/>
+
+                        <EditText
+                            android:id="@+id/etAge"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/bg_input"
+                            android:hint="例如：25"
+                            android:padding="12dp"
+                            android:inputType="number"
+                            android:textColor="#111827"
+                            android:textColorHint="#9CA3AF"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 出生日期 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="出生日期"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"/>
+
+                <!--<EditText
+                    android:id="@+id/etBirthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="例如：1999-01-01"
+                    android:padding="12dp"
+                    android:inputType="datetime|date"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"/>-->
+                <EditText
+                    android:id="@+id/etBirthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="选择日期"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:clickable="true"
+                    android:longClickable="false"
+                    android:cursorVisible="false"
+                    android:padding="12dp" />
+
+                <!-- 电话 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="电话号码"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"/>
+
+                <EditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="例如：138xxxxxx"
+                    android:padding="12dp"
+                    android:inputType="phone"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"/>
+
+                <!-- 身份证 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="身份证号码"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"/>
+
+                <EditText
+                    android:id="@+id/etIdCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="例如：5113xxxxxxxxxxxxxx"
+                    android:padding="12dp"
+                    android:inputType="text"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"/>
+            </LinearLayout>
+
+            <!-- 卡片2：地址与过敏史 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_card"
+                android:padding="14dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="地址与过敏史"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="#111827"/>
+
+                <!-- 地址 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="地址"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"/>
+
+                <EditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="例如：四川省成都市..."
+                    android:padding="12dp"
+                    android:minLines="2"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:nestedScrollingEnabled="false"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"/>
+
+                <!-- 过敏史 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="过敏史"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"/>
+
+                <EditText
+                    android:id="@+id/etAllergy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="例如：青霉素过敏"
+                    android:padding="12dp"
+                    android:minLines="2"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:nestedScrollingEnabled="false"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"/>
+            </LinearLayout>
+
+            <!-- 卡片3：既往史与总体方案 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_card"
+                android:padding="14dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="既往史与总体方案"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="#111827"/>
+
+                <!-- 既往史 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="既往史"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"/>
+
+                <EditText
+                    android:id="@+id/etMedicalHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="例如：高血压、糖尿病..."
+                    android:padding="12dp"
+                    android:minLines="3"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:nestedScrollingEnabled="false"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"/>
+
+                <!-- 总体方案 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="总体方案"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"/>
+
+                <EditText
+                    android:id="@+id/etMasterPlan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="例如：控制炎症，定期复诊..."
+                    android:padding="12dp"
+                    android:minLines="3"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:nestedScrollingEnabled="false"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"/>
+            </LinearLayout>
+
+            <!-- 给底部按钮留空，避免被 bottomBar 盖住 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="90dp"/>
+
         </LinearLayout>
+    </ScrollView>
 
+    <!-- 底部固定操作栏 -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_bar"
+        android:padding="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_primary_button"
+            android:text="保存档案"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"/>
     </LinearLayout>
-</ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

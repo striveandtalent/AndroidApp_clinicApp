@@ -12,6 +12,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".VisitDetail.VisitEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VisitDetail.VisitCreateActivity"
+            android:exported="false" />
+        <activity
             android:name=".PatientDetail.PatientEditActivity"
             android:exported="false" />
         <activity
@@ -19,6 +25,7 @@
             android:exported="false" />
         <activity
             android:name=".PatientDetail.PatientDetailActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".Patient_Create.CreatePatientActivity"
