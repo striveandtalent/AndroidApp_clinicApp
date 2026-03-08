@@ -1,29 +1,20 @@
 package com.eightbitlab.blurview_sample.VisitDetail;
 
-import com.google.gson.annotations.SerializedName;
-
 public class VisitUpdateRequest {
-    @SerializedName("VisitNo")
+
     public String VisitNo;
 
-    @SerializedName("VisitTime")
-    public String VisitTime; // 暂时不用可以不填
+    // 可空，先不在编辑页里改它
+    public String VisitTime;
 
-    @SerializedName("ChiefComplaint")
     public String ChiefComplaint;
-
-    @SerializedName("PresentIllness")
     public String PresentIllness;
+    public String PhysicalSigns;
+    public String Diagnosis;
 
-    @SerializedName("TreatmentPlan")
-    public String TreatmentPlan;
+    // 后端是 int?
+    public Integer TreatmentEffect;
 
-    @SerializedName("PatientCooperation")
-    public String PatientCooperation;
-
-    @SerializedName("DoctorPatientRelation")
-    public String DoctorPatientRelation;
-
-    @SerializedName("PrognosisNote")
-    public String PrognosisNote;
+    public String DoctorAdvice;
+    public String Remark;
 }

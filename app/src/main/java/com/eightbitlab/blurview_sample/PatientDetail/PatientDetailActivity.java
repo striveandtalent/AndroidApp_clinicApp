@@ -16,11 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.eightbitlab.blurview_sample.R;
 import com.eightbitlab.blurview_sample.ReturnInfo;
-import com.eightbitlab.blurview_sample.TimeFmt;
+import com.eightbitlab.blurview_sample.util.TimeFmt;
 import com.eightbitlab.blurview_sample.VisitDetail.VisitCreateActivity;
 import com.eightbitlab.blurview_sample.VisitDetail.VisitDetailActivity;
 import com.eightbitlab.blurview_sample.net.ApiClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,19 +34,47 @@ public class PatientDetailActivity extends AppCompatActivity {
     private View layoutVisitRecordsEmpty;
     private VisitCardAdapter visitAdapter;
 
-    private TextView tvName, tvGender, tvAge, tvBirthday, tvPhone, tvIdCard, tvAddress, tvAllergy, tvMedicalHistory, tvMasterPlan, tvPatientId;
+    private TextView tvName;
+    private TextView tvGender;
+    private TextView tvAge;
+    private TextView tvBirthday;
+    private TextView tvPhone;
+    private TextView tvIdCard;
+    private TextView tvAddress;
+    private TextView tvAllergy;
+    private TextView tvMedicalHistory;
+    private TextView tvMasterPlan;
+    private TextView tvPatientId;
 
-    private static final int REQ_EDIT_PATIENT = 1001;//对档案编辑页面的请求码
-    private String patientId; // 把 patientId 提到成员变量，方便 onActivityResult 用
-    private ActivityResultLauncher<Intent> editPatientLauncher;//接收档案编辑页返回数据用
-    private ActivityResultLauncher<Intent> createVisitLauncher;//接收新建病历页面返回的结果
+    private String patientId;
+
+    private ActivityResultLauncher<Intent> editPatientLauncher;
+    private ActivityResultLauncher<Intent> createVisitLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //档案字段
         setContentView(R.layout.activity_patient_detail);
+
+        bindViews();
+
+        patientId = getIntent().getStringExtra("patientId");
+        if (isBlank(patientId)) {
+            Toast.makeText(this, "patientId 为空", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+        patientId = patientId.trim();
+
+        registerLaunchers();
+        setupPatientCardClick();
+        setupVisitList();
+        setupAddVisitButton();
+
+        loadAll();
+    }
+
+    private void bindViews() {
         tvName = findViewById(R.id.tvName);
         tvGender = findViewById(R.id.tvGender);
         tvAge = findViewById(R.id.tvAge);
@@ -58,97 +87,121 @@ public class PatientDetailActivity extends AppCompatActivity {
         tvMasterPlan = findViewById(R.id.tvMasterPlan);
         tvPatientId = findViewById(R.id.tvPatientId);
 
-        //点击创建病历按钮事件
+        rvVisitRecords = findViewById(R.id.rvVisitRecords);
+        layoutVisitRecordsEmpty = findViewById(R.id.layoutVisitVisitEmpty);
+    }
+
+    private void registerLaunchers() {
+        editPatientLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        loadAll();
+                    }
+                }
+        );
+
+        createVisitLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        loadVisits(patientId);
+                    }
+                }
+        );
+    }
+
+    private void setupPatientCardClick() {
+        findViewById(R.id.cardPatientInfo).setOnClickListener(v -> {
+            Intent it = new Intent(PatientDetailActivity.this, PatientEditActivity.class);
+            it.putExtra("patientId", patientId);
+            editPatientLauncher.launch(it);
+        });
+    }
+
+    private void setupAddVisitButton() {
         findViewById(R.id.btnAddVisitFab).setOnClickListener(v -> {
             Intent it = new Intent(PatientDetailActivity.this, VisitCreateActivity.class);
             it.putExtra("patientId", patientId);
             createVisitLauncher.launch(it);
         });
-        //处理创建病历页面的回调
-        createVisitLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode() == RESULT_OK) {
-                // 创建成功，刷新病历列表
-                loadVisits(patientId);
-            }
-        });
+    }
 
-        patientId = getIntent().getStringExtra("patientId");
-        if (patientId == null || patientId.trim().isEmpty()) {
-            Toast.makeText(this, "patientId 为空", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
-
-        loadDetail(patientId.trim());
-
-        //添加点击档案卡片跳转到更新档案页面
-        editPatientLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        loadDetail(patientId.trim()); // 刷新档案
-                    }
-                }
-        );
-
-        findViewById(R.id.cardPatientInfo).setOnClickListener(v -> {
-            Intent it = new Intent(PatientDetailActivity.this, PatientEditActivity.class);
-            it.putExtra("patientId", patientId.trim());
-            editPatientLauncher.launch(it);
-        });
-
-        //病历字段
-        rvVisitRecords = findViewById(R.id.rvVisitRecords);
-        layoutVisitRecordsEmpty = findViewById(R.id.layoutVisitVisitEmpty);
+    private void setupVisitList() {
         LinearLayoutManager lm = new LinearLayoutManager(this);
         lm.setAutoMeasureEnabled(true);
         rvVisitRecords.setLayoutManager(lm);
-        rvVisitRecords.setHasFixedSize(false);          // 很关键：不要固定尺寸
-        rvVisitRecords.setNestedScrollingEnabled(false);// 你 XML 里写了，这里再保险
+        rvVisitRecords.setHasFixedSize(false);
+        rvVisitRecords.setNestedScrollingEnabled(false);
 
-        //获取病历列表并交给 Adapter
         visitAdapter = new VisitCardAdapter(item -> {
+            if (item == null || isBlank(item.visitNo)) {
+                Toast.makeText(PatientDetailActivity.this, "该病历缺少 visitNo，无法打开详情", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             Intent it = new Intent(PatientDetailActivity.this, VisitDetailActivity.class);
-            it.putExtra("visitNo", item.visitNo);
-            it.putExtra("patientId", item.patientId);
+            it.putExtra("visitNo", item.visitNo.trim());
+            it.putExtra("patientId", patientId);
             startActivity(it);
         });
+
         rvVisitRecords.setAdapter(visitAdapter);
-        String pid = patientId.trim();
-        loadDetail(pid);
-        loadVisits(pid);
+        renderVisitEmpty(true);
+    }
+
+    private void loadAll() {
+        loadDetail(patientId);
+        loadVisits(patientId);
     }
 
     private void loadVisits(String patientId) {
-        ApiClient.api().getVisitsByPatientId(patientId).enqueue(new Callback<ReturnInfo<List<VisitSimpleModel>>>() {
-            @Override
-            public void onResponse(@NonNull Call<ReturnInfo<List<VisitSimpleModel>>> call,
-                                   @NonNull Response<ReturnInfo<List<VisitSimpleModel>>> response) {
-                if (!response.isSuccessful() || response.body() == null) {
-                    renderVisitEmpty(true);
-                    Toast.makeText(PatientDetailActivity.this, "病历获取失败：" + response.code(), Toast.LENGTH_SHORT).show();
-                    return;
-                }
+        ApiClient.api().getVisitsByPatientId(patientId)
+                .enqueue(new Callback<ReturnInfo<List<VisitSimpleModel>>>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ReturnInfo<List<VisitSimpleModel>>> call,
+                                           @NonNull Response<ReturnInfo<List<VisitSimpleModel>>> response) {
 
-                ReturnInfo<List<VisitSimpleModel>> body = response.body();
-                if (body.status != 0 || body.data == null) {
-                    renderVisitEmpty(true);
-                    Toast.makeText(PatientDetailActivity.this,
-                            body.message == null ? "病历获取失败" : body.message,
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                        if (!response.isSuccessful() || response.body() == null) {
+                            renderVisitEmpty(true);
+                            Toast.makeText(PatientDetailActivity.this,
+                                    "病历获取失败：" + response.code(),
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-                visitAdapter.submit(body.data);
-                renderVisitEmpty(body.data.isEmpty());
-            }
+                        ReturnInfo<List<VisitSimpleModel>> body = response.body();
+                        if (body.status != 0) {
+                            renderVisitEmpty(true);
+                            Toast.makeText(PatientDetailActivity.this,
+                                    safe(body.message, "病历获取失败"),
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-            @Override
-            public void onFailure(@NonNull Call<ReturnInfo<List<VisitSimpleModel>>> call, @NonNull Throwable t) {
-                renderVisitEmpty(true);
-                Toast.makeText(PatientDetailActivity.this, "病历网络异常：" + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                        List<VisitSimpleModel> data = body.data;
+                        if (data == null) {
+                            data = new ArrayList<>();
+                        }
+
+                        visitAdapter.submit(data);
+                        renderVisitEmpty(data.isEmpty());
+
+                        // 这一句是为了帮助你当前排查
+                        Toast.makeText(PatientDetailActivity.this,
+                                "病历条数：" + data.size(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ReturnInfo<List<VisitSimpleModel>>> call,
+                                          @NonNull Throwable t) {
+                        renderVisitEmpty(true);
+                        Toast.makeText(PatientDetailActivity.this,
+                                "病历网络异常：" + t.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void renderVisitEmpty(boolean empty) {
@@ -157,53 +210,81 @@ public class PatientDetailActivity extends AppCompatActivity {
     }
 
     private void loadDetail(String patientId) {
-        ApiClient.api().getByPatientId(patientId).enqueue(new Callback<ReturnInfo<PatientModel>>() {
-            @Override
-            public void onResponse(@NonNull Call<ReturnInfo<PatientModel>> call,
-                                   @NonNull Response<ReturnInfo<PatientModel>> response) {
-                if (!response.isSuccessful() || response.body() == null) {
-                    Toast.makeText(PatientDetailActivity.this, "HTTP错误：" + response.code(), Toast.LENGTH_SHORT).show();
-                    return;
-                }
+        ApiClient.api().getByPatientId(patientId)
+                .enqueue(new Callback<ReturnInfo<PatientModel>>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ReturnInfo<PatientModel>> call,
+                                           @NonNull Response<ReturnInfo<PatientModel>> response) {
+                        if (!response.isSuccessful() || response.body() == null) {
+                            Toast.makeText(PatientDetailActivity.this,
+                                    "HTTP错误：" + response.code(),
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-                ReturnInfo<PatientModel> body = response.body();
-                if (body.status != 0) {
-                    Toast.makeText(PatientDetailActivity.this,
-                            body.message == null ? "获取失败" : body.message,
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                        ReturnInfo<PatientModel> body = response.body();
+                        if (body.status != 0) {
+                            Toast.makeText(PatientDetailActivity.this,
+                                    safe(body.message, "获取失败"),
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-                PatientModel p = body.data;
-                if (p == null) {
-                    Toast.makeText(PatientDetailActivity.this, "返回 data 为空", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                        PatientModel p = body.data;
+                        if (p == null) {
+                            Toast.makeText(PatientDetailActivity.this,
+                                    "返回 data 为空",
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-                // 渲染
-                tvPatientId.setText(safe(p.patientId));
-                tvName.setText(safe(p.name));
-                tvGender.setText(safe(p.gender));
-                tvAge.setText(safe(String.valueOf(p.age)));
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    tvBirthday.setText(TimeFmt.fmtDateOnly(safe(String.valueOf(p.birthday))));
-                }
-                tvPhone.setText(safe(p.phone));
-                tvIdCard.setText(safe(p.idCard));
-                tvAddress.setText(safe(p.address));
-                tvAllergy.setText(safe(p.allergy));
-                tvMedicalHistory.setText(safe(p.medicalHistory));
-                tvMasterPlan.setText(safe(p.masterPlan));
+                        bindPatient(p);
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ReturnInfo<PatientModel>> call,
+                                          @NonNull Throwable t) {
+                        Toast.makeText(PatientDetailActivity.this,
+                                "网络异常：" + t.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void bindPatient(PatientModel p) {
+        tvPatientId.setText(safe(p.patientId));
+        tvName.setText(safe(p.name));
+        tvGender.setText(safe(p.gender));
+        tvAge.setText(safe(String.valueOf(p.age)));
+
+        String birthday = safe(String.valueOf(p.birthday));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !birthday.isEmpty()) {
+            try {
+                tvBirthday.setText(TimeFmt.fmtDateOnly(birthday));
+            } catch (Exception e) {
+                tvBirthday.setText(birthday);
             }
+        } else {
+            tvBirthday.setText(birthday);
+        }
 
-            @Override
-            public void onFailure(@NonNull Call<ReturnInfo<PatientModel>> call, @NonNull Throwable t) {
-                Toast.makeText(PatientDetailActivity.this, "网络异常：" + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        tvPhone.setText(safe(p.phone));
+        tvIdCard.setText(safe(p.idCard));
+        tvAddress.setText(safe(p.address));
+        tvAllergy.setText(safe(p.allergy));
+        tvMedicalHistory.setText(safe(p.medicalHistory));
+        tvMasterPlan.setText(safe(p.masterPlan));
+    }
+
+    private boolean isBlank(String s) {
+        return s == null || s.trim().isEmpty();
     }
 
     private String safe(String s) {
         return s == null ? "" : s;
+    }
+
+    private String safe(String s, String fallback) {
+        return (s == null || s.trim().isEmpty()) ? fallback : s;
     }
 }

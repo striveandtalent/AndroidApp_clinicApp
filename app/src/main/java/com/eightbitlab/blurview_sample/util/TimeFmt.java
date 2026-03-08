@@ -1,4 +1,4 @@
-package com.eightbitlab.blurview_sample;
+package com.eightbitlab.blurview_sample.util;
 
 import android.os.Build;
 

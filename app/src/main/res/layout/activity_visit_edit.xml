@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#F3F7FF">
 
-    <!-- 顶部标题 -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
@@ -23,9 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- 表单滚动区 -->
     <ScrollView
-        android:id="@+id/svRoot"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -42,32 +39,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- 卡片：病情与方案 -->
+            <!-- 病情与方案 -->
             <LinearLayout
                 android:id="@+id/groupIllness"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_card"
+                android:orientation="vertical"
                 android:padding="14dp"
-                android:orientation="vertical">
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="病情与方案"
-                    android:textStyle="bold"
+                    android:textColor="#111827"
                     android:textSize="15sp"
-                    android:textColor="#111827"/>
+                    android:textStyle="bold"/>
 
-                <!-- 主诉 -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="主诉"
-                    android:textSize="12sp"
                     android:textColor="#6B7280"
-                    android:layout_marginTop="10dp"/>
+                    android:textSize="12sp"/>
 
                 <EditText
                     android:id="@+id/etChiefComplaint"
@@ -76,18 +73,16 @@
                     android:layout_marginTop="6dp"
                     android:background="@drawable/bg_input"
                     android:padding="12dp"
-                    android:hint="例如：牙痛/牙龈出血…"
                     android:textColor="#111827"
                     android:textColorHint="#9CA3AF"/>
 
-                <!-- 现病史 -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="现病史"
-                    android:textSize="12sp"
                     android:textColor="#6B7280"
-                    android:layout_marginTop="10dp"/>
+                    android:textSize="12sp"/>
 
                 <EditText
                     android:id="@+id/etPresentIllness"
@@ -95,128 +90,163 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:background="@drawable/bg_input"
-                    android:padding="12dp"
-                    android:minLines="3"
                     android:gravity="top"
-                    android:hint="例如：疼痛持续多久、诱因…"
+                    android:minLines="3"
+                    android:padding="12dp"
                     android:textColor="#111827"
                     android:textColorHint="#9CA3AF"/>
 
-                <!-- 治疗方案 -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="治疗方案"
-                    android:textSize="12sp"
+                    android:layout_marginTop="10dp"
+                    android:text="体征"
                     android:textColor="#6B7280"
-                    android:layout_marginTop="10dp"/>
+                    android:textSize="12sp"/>
 
                 <EditText
-                    android:id="@+id/etTreatmentPlan"
+                    android:id="@+id/etPhysicalSigns"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:background="@drawable/bg_input"
-                    android:padding="12dp"
-                    android:minLines="3"
                     android:gravity="top"
-                    android:hint="例如：洁治+复诊+注意事项…"
+                    android:minLines="3"
+                    android:padding="12dp"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="诊断"
+                    android:textColor="#6B7280"
+                    android:textSize="12sp"/>
+
+                <EditText
+                    android:id="@+id/etDiagnosis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="top"
+                    android:minLines="3"
+                    android:padding="12dp"
                     android:textColor="#111827"
                     android:textColorHint="#9CA3AF"/>
             </LinearLayout>
 
-            <!-- 卡片：沟通与预后 -->
+            <!-- 治疗经过 -->
             <LinearLayout
-                android:id="@+id/groupRelation"
+                android:id="@+id/groupTreatmentProcess"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_card"
-                android:padding="14dp"
                 android:orientation="vertical"
+                android:padding="14dp"
                 android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="沟通与预后"
-                    android:textStyle="bold"
+                    android:text="治疗经过"
+                    android:textColor="#111827"
                     android:textSize="15sp"
-                    android:textColor="#111827"/>
+                    android:textStyle="bold"/>
 
-                <!-- 患者配合度 -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="患者配合度"
-                    android:textSize="12sp"
+                    android:layout_marginTop="10dp"
+                    android:text="治疗效果（数字）"
                     android:textColor="#6B7280"
-                    android:layout_marginTop="10dp"/>
+                    android:textSize="12sp"/>
 
                 <EditText
-                    android:id="@+id/etPatientCooperation"
+                    android:id="@+id/etTreatmentEffect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:background="@drawable/bg_input"
+                    android:hint="例如：1 / 2 / 3 / 4"
+                    android:inputType="number"
                     android:padding="12dp"
-                    android:hint="例如：配合/一般/差…"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
-
-                <!-- 医患沟通 -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="医患沟通"
-                    android:textSize="12sp"
-                    android:textColor="#6B7280"
-                    android:layout_marginTop="10dp"/>
-
-                <EditText
-                    android:id="@+id/etDoctorPatientRelation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:background="@drawable/bg_input"
-                    android:padding="12dp"
-                    android:minLines="3"
-                    android:gravity="top"
-                    android:hint="例如：已说明风险与费用…"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
-
-                <!-- 预后备注 -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="预后备注"
-                    android:textSize="12sp"
-                    android:textColor="#6B7280"
-                    android:layout_marginTop="10dp"/>
-
-                <EditText
-                    android:id="@+id/etPrognosisNote"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:background="@drawable/bg_input"
-                    android:padding="12dp"
-                    android:minLines="3"
-                    android:gravity="top"
-                    android:hint="例如：预计复诊时间、注意事项…"
                     android:textColor="#111827"
                     android:textColorHint="#9CA3AF"/>
             </LinearLayout>
 
-            <!-- 给底部按钮留空间（避免被 bottomBar 盖住） -->
+            <!-- 医嘱 -->
+            <LinearLayout
+                android:id="@+id/groupDoctorAdvice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_card"
+                android:orientation="vertical"
+                android:padding="14dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="医嘱"
+                    android:textColor="#111827"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/etDoctorAdvice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="top"
+                    android:minLines="4"
+                    android:padding="12dp"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"/>
+            </LinearLayout>
+
+            <!-- 备注 -->
+            <LinearLayout
+                android:id="@+id/groupRemark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_card"
+                android:orientation="vertical"
+                android:padding="14dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="备注"
+                    android:textColor="#111827"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/etRemark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="top"
+                    android:minLines="4"
+                    android:padding="12dp"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"/>
+            </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="80dp"/>
         </LinearLayout>
     </ScrollView>
 
-    <!-- 底部固定按钮栏（和 patient_edit 一样） -->
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="0dp"
@@ -233,9 +263,9 @@
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="52dp"
+            android:background="@drawable/bg_primary_button"
             android:text="保存"
-            android:textStyle="bold"
-            android:background="@drawable/bg_primary_button"/>
+            android:textStyle="bold"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

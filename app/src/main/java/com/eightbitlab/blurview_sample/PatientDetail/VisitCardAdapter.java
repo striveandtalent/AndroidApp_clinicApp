@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eightbitlab.blurview_sample.R;
-import com.eightbitlab.blurview_sample.TimeFmt;
+import com.eightbitlab.blurview_sample.util.TimeFmt;
 
 import java.util.ArrayList;
 import java.util.List;

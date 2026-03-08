@@ -109,20 +109,21 @@ public class PatientEditActivity extends AppCompatActivity {
                     Toast.makeText(PatientEditActivity.this, "获取档案失败", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 PatientModel p = resp.body().data;
 
-                //加载数据
+                // 加载数据
                 etName.setText(nvl(p.name));
                 etGender.setText(nvl(p.gender));
                 etAge.setText(nvl(String.valueOf(p.age)));
 
-                //etBirthday.setText(nvl(p.birthday));
                 String bd = nvl(p.birthday);
                 if (!bd.isEmpty()) {
                     int t = bd.indexOf('T');
-                    if (t > 0) bd = bd.substring(0, t);  // 2020-03-24T00:00:00 -> 2020-03-24
+                    if (t > 0) bd = bd.substring(0, t);
                 }
                 etBirthday.setText(bd);
+
                 etPhone.setText(nvl(p.phone));
                 etIdCard.setText(nvl(p.idCard));
                 etAddress.setText(nvl(p.address));

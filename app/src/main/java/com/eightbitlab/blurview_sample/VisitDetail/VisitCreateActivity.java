@@ -101,7 +101,6 @@ public class VisitCreateActivity extends AppCompatActivity {
                 Toast.makeText(VisitCreateActivity.this, "创建成功，病历号：" + body.data, Toast.LENGTH_SHORT).show();
 
                 //创建后直接跳转到对应页面
-                 Intent it = new Intent(VisitCreateActivity.this, PatientDetailActivity.class);
                  setResult(RESULT_OK);
                 finish();
             }
