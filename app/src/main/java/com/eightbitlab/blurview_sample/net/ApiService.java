@@ -75,7 +75,7 @@ public interface ApiService {
     @GET("api/Visits/detail-aggregate")
     Call<ReturnInfo<VisitDetailAggregateModel>> getVisitDetailAggregate(@Query("visitNo") String visitNo);
 
-    @POST("api/Visits")
+    @POST("api/Visits/create")
     Call<ReturnInfo<String>> createVisit(@Body VisitCreateDto dto);
 
     @PUT("api/Visits/updateByVisitNo")

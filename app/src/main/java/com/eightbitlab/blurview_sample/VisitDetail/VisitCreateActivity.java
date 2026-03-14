@@ -1,6 +1,5 @@
 package com.eightbitlab.blurview_sample.VisitDetail;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,10 +8,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.eightbitlab.blurview_sample.PatientDetail.PatientDetailActivity;
 import com.eightbitlab.blurview_sample.R;
 import com.eightbitlab.blurview_sample.ReturnInfo;
-import com.eightbitlab.blurview_sample.VisitDetail.VisitCreateDto;
 import com.eightbitlab.blurview_sample.net.ApiClient;
 
 import retrofit2.Call;
@@ -23,8 +20,12 @@ public class VisitCreateActivity extends AppCompatActivity {
 
     private String patientId;
 
-    private EditText etChiefComplaint, etPresentIllness, etTreatmentPlan;
-    private EditText etPatientCooperation, etDoctorPatientRelation, etPrognosisNote;
+    private EditText etChiefComplaint;
+    private EditText etPresentIllness;
+    private EditText etPhysicalSigns;
+    private EditText etDiagnosis;
+    private EditText etDoctorAdvice;
+    private EditText etRemark;
     private Button btnSaveVisit;
 
     @Override
@@ -41,40 +42,38 @@ public class VisitCreateActivity extends AppCompatActivity {
 
         etChiefComplaint = findViewById(R.id.etChiefComplaint);
         etPresentIllness = findViewById(R.id.etPresentIllness);
-        etTreatmentPlan = findViewById(R.id.etTreatmentPlan);
-
-        etPatientCooperation = findViewById(R.id.etPatientCooperation);
-        etDoctorPatientRelation = findViewById(R.id.etDoctorPatientRelation);
-        etPrognosisNote = findViewById(R.id.etPrognosisNote);
+        etPhysicalSigns = findViewById(R.id.etPhysicalSigns);
+        etDiagnosis = findViewById(R.id.etDiagnosis);
+        etDoctorAdvice = findViewById(R.id.etDoctorAdvice);
+        etRemark = findViewById(R.id.etRemark);
 
         btnSaveVisit = findViewById(R.id.btnSaveVisit);
-
         btnSaveVisit.setOnClickListener(v -> doSave());
     }
 
     private void doSave() {
-        String chief = etChiefComplaint.getText().toString().trim();
-        String present = etPresentIllness.getText().toString().trim();
-        String plan = etTreatmentPlan.getText().toString().trim();
+        String chiefComplaint = getText(etChiefComplaint);
+        String presentIllness = getText(etPresentIllness);
+        String physicalSigns = getText(etPhysicalSigns);
+        String diagnosis = getText(etDiagnosis);
+        String doctorAdvice = getText(etDoctorAdvice);
+        String remark = getText(etRemark);
 
-        String coop = etPatientCooperation.getText().toString().trim();
-        String relation = etDoctorPatientRelation.getText().toString().trim();
-        String prog = etPrognosisNote.getText().toString().trim();
-
-        // 自己定必填项，我建议至少主诉必填
-        if (chief.isEmpty()) {
+        if (chiefComplaint.isEmpty()) {
             Toast.makeText(this, "主诉不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
 
         VisitCreateDto dto = new VisitCreateDto();
         dto.patientId = patientId;
-        dto.chiefComplaint = chief;
-        dto.presentIllness = present;
-        dto.treatmentPlan = plan;
-        dto.patientCooperation = coop;
-        dto.doctorPatientRelation = relation;
-        dto.prognosisNote = prog;
+        dto.visitTime = null;          // 先让后端用当前时间
+        dto.chiefComplaint = chiefComplaint;
+        dto.presentIllness = emptyToNull(presentIllness);
+        dto.physicalSigns = emptyToNull(physicalSigns);
+        dto.diagnosis = emptyToNull(diagnosis);
+        dto.treatmentEffect = null;    // 创建页先不填，后续详情页再维护
+        dto.doctorAdvice = emptyToNull(doctorAdvice);
+        dto.remark = emptyToNull(remark);
 
         btnSaveVisit.setEnabled(false);
 
@@ -85,31 +84,40 @@ public class VisitCreateActivity extends AppCompatActivity {
                 btnSaveVisit.setEnabled(true);
 
                 if (!response.isSuccessful() || response.body() == null) {
-                    Toast.makeText(VisitCreateActivity.this, "HTTP错误：" + response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VisitCreateActivity.this,
+                            "HTTP错误：" + response.code(),
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 ReturnInfo<String> body = response.body();
-                if (body.status != 0 || body.data == null || body.data.trim().isEmpty()) {
+                if (body.status != 0) {
                     Toast.makeText(VisitCreateActivity.this,
                             body.message == null ? "创建失败" : body.message,
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // body.data = visitNo
-                Toast.makeText(VisitCreateActivity.this, "创建成功，病历号：" + body.data, Toast.LENGTH_SHORT).show();
-
-                //创建后直接跳转到对应页面
-                 setResult(RESULT_OK);
+                Toast.makeText(VisitCreateActivity.this, "病历创建成功", Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK);
                 finish();
             }
 
             @Override
             public void onFailure(@NonNull Call<ReturnInfo<String>> call, @NonNull Throwable t) {
                 btnSaveVisit.setEnabled(true);
-                Toast.makeText(VisitCreateActivity.this, "网络异常：" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(VisitCreateActivity.this,
+                        "网络异常：" + t.getMessage(),
+                        Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private String getText(EditText et) {
+        return et == null ? "" : et.getText().toString().trim();
+    }
+
+    private String emptyToNull(String value) {
+        return value == null || value.trim().isEmpty() ? null : value.trim();
     }
 }

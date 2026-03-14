@@ -649,7 +649,21 @@ public class VisitDetailActivity extends AppCompatActivity {
         return ext.equals(".jpg") || ext.equals(".jpeg") || ext.equals(".png")
                 || ext.equals(".webp") || ext.equals(".bmp");
     }
+    private boolean isVideoAttachment(VisitMediaItemModel item) {
+        if (item == null) return false;
 
+        String contentType = safe(item.contentType).toLowerCase();
+        if (contentType.startsWith("video/")) {
+            return true;
+        }
+
+        String ext = safe(item.ext).toLowerCase();
+        return ext.equals(".mp4")
+                || ext.equals(".mov")
+                || ext.equals(".m4v")
+                || ext.equals(".3gp")
+                || ext.equals(".webm");
+    }
     private void openAttachmentPreview(VisitMediaItemModel item) {
         if (item == null || isBlank(item.url)) {
             Toast.makeText(this, "附件地址为空，无法预览", Toast.LENGTH_SHORT).show();
@@ -659,6 +673,14 @@ public class VisitDetailActivity extends AppCompatActivity {
         String finalUrl = buildAbsoluteUrl(item.url);
         if (isBlank(finalUrl)) {
             Toast.makeText(this, "附件地址无效，无法预览", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (isVideoAttachment(item)) {
+            Intent it = new Intent(this, VideoPreviewActivity.class);
+            it.putExtra("url", finalUrl);
+            it.putExtra("fileName", safe(item.fileName));
+            startActivity(it);
             return;
         }
 

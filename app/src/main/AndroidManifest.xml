@@ -15,6 +15,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".VisitDetail.VideoPreviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".VisitDetail.TreatmentRecordEditActivity"
             android:exported="false" />
         <activity
