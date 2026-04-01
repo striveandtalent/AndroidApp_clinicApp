@@ -40,14 +40,11 @@ public interface ApiService {
     // 病人档案
     // =========================
 
+
+
     @GET("api/Patients/search")
     Call<ReturnInfo<PageResult<PatientModel>>> searchPatients(
-            @Query("Name") String name,
-            @Query("Phone") String phone,
-            @Query("IDCard") String idCard,
-            @Query("Address") String address,
-            @Query("Allergy") String allergy,
-            @Query("MedicalHistory") String medicalHistory
+            @Query("keyword") String keyword
     );
 
     @POST("api/Patients")
