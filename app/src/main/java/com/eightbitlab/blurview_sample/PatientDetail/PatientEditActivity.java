@@ -20,10 +20,15 @@ import android.app.DatePickerDialog;
 import java.util.Calendar;
 import java.util.Locale;
 
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
 public class PatientEditActivity extends AppCompatActivity {
     private String patientId;
 
-    private EditText etName, etGender, etAge, etBirthday, etPhone, etIdCard, etAddress, etAllergy, etMedicalHistory, etMasterPlan;//需要更新档案的字段
+    private EditText etName, etAge, etBirthday, etPhone, etIdCard, etAddress, etAllergy, etMedicalHistory, etMasterPlan;
+    private RadioGroup rgGender;
+    private RadioButton rbMale, rbFemale;
     private Button btnSave;
 
     @Override
@@ -34,7 +39,9 @@ public class PatientEditActivity extends AppCompatActivity {
         patientId = getIntent().getStringExtra("patientId");
 
         etName = findViewById(R.id.etName);
-        etGender = findViewById(R.id.etGender);
+        rgGender = findViewById(R.id.rgGender);
+        rbMale = findViewById(R.id.rbMale);
+        rbFemale = findViewById(R.id.rbFemale);
         etAge = findViewById(R.id.etAge);
 
         etBirthday = findViewById(R.id.etBirthday);
@@ -114,8 +121,17 @@ public class PatientEditActivity extends AppCompatActivity {
 
                 // 加载数据
                 etName.setText(nvl(p.name));
-                etGender.setText(nvl(p.gender));
-                etAge.setText(nvl(String.valueOf(p.age)));
+
+                String gender = nvl(p.gender);
+                if ("男".equals(gender)) {
+                    rgGender.check(R.id.rbMale);
+                } else if ("女".equals(gender)) {
+                    rgGender.check(R.id.rbFemale);
+                } else {
+                    rgGender.clearCheck();
+                }
+
+                etAge.setText(p.age == null ? "" : String.valueOf(p.age));
 
                 String bd = nvl(p.birthday);
                 if (!bd.isEmpty()) {
@@ -142,8 +158,19 @@ public class PatientEditActivity extends AppCompatActivity {
     private void save() {
         PatientModel req = new PatientModel();
         req.name = etName.getText().toString().trim();
-        req.gender = etGender.getText().toString().trim();
 
+        int checkedId = rgGender.getCheckedRadioButtonId();
+        if (checkedId == R.id.rbMale) {
+            req.gender = "男";
+        } else if (checkedId == R.id.rbFemale) {
+            req.gender = "女";
+        } else {
+            req.gender = "";
+        }
+        if (req.gender == null || req.gender.trim().isEmpty()) {
+            Toast.makeText(PatientEditActivity.this, "请选择性别", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String ageStr = etAge.getText().toString().trim();
         req.age = ageStr.isEmpty() ? null : Integer.parseInt(ageStr);
 
@@ -161,7 +188,10 @@ public class PatientEditActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ReturnInfo<Object>> call, Response<ReturnInfo<Object>> resp) {
                 if (!resp.isSuccessful() || resp.body() == null || resp.body().status != 0) {
-                    Toast.makeText(PatientEditActivity.this, resp.body().message, Toast.LENGTH_SHORT).show();
+                    String msg = (resp.body() != null && resp.body().message != null)
+                            ? resp.body().message
+                            : "保存失败";
+                    Toast.makeText(PatientEditActivity.this, msg, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Toast.makeText(PatientEditActivity.this, "保存成功", Toast.LENGTH_SHORT).show();

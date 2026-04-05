@@ -176,8 +176,79 @@ public class CaseFragment extends Fragment {
                           @Nullable FloatingActionButton refreshFab,
                           boolean showRefreshToast) {
 
-        Call<ReturnInfo<PageResult<PatientModel>>> call =
-                ApiClient.api().searchPatients(keyword);
+        String kw = keyword == null ? "" : keyword.trim();
+
+        // 关键字为空：走获取全部接口
+        if (kw.isEmpty()) {
+            Call<ReturnInfo<List<PatientModel>>> call = ApiClient.api().getPatients();
+
+            call.enqueue(new Callback<ReturnInfo<List<PatientModel>>>() {
+                @Override
+                public void onResponse(@NonNull Call<ReturnInfo<List<PatientModel>>> call,
+                                       @NonNull Response<ReturnInfo<List<PatientModel>>> response) {
+
+                    stopRefreshAnim(refreshFab);
+
+                    if (!response.isSuccessful()) {
+                        adapter.submit(Collections.emptyList());
+                        showEmpty(true);
+                        Toast.makeText(requireContext(), "HTTP错误：" + response.code(), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    ReturnInfo<List<PatientModel>> body = response.body();
+                    if (body == null) {
+                        adapter.submit(Collections.emptyList());
+                        showEmpty(true);
+                        Toast.makeText(requireContext(), "响应为空", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (body.status != 0) {
+                        adapter.submit(Collections.emptyList());
+                        showEmpty(true);
+                        Toast.makeText(requireContext(),
+                                body.message == null ? "查询失败" : body.message,
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    List<PatientModel> items = body.data;
+                    boolean isEmpty = (items == null || items.isEmpty());
+
+                    if (isEmpty) {
+                        adapter.submit(Collections.emptyList());
+                        showEmpty(true);
+                    } else {
+                        adapter.submit(items);
+                        showEmpty(false);
+                    }
+
+                    if (showRefreshToast) {
+                        Toast.makeText(
+                                requireContext(),
+                                isEmpty ? "刷新成功，暂无数据" : "刷新成功",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<ReturnInfo<List<PatientModel>>> call,
+                                      @NonNull Throwable t) {
+
+                    stopRefreshAnim(refreshFab);
+                    adapter.submit(Collections.emptyList());
+                    showEmpty(true);
+                    Toast.makeText(requireContext(), "网络异常：" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            return;
+        }
+
+        // 关键字不为空：走搜索接口
+        Call<ReturnInfo<PageResult<PatientModel>>> call = ApiClient.api().searchPatients(kw);
 
         call.enqueue(new Callback<ReturnInfo<PageResult<PatientModel>>>() {
             @Override
@@ -210,7 +281,6 @@ public class CaseFragment extends Fragment {
                     return;
                 }
 
-                // 业务成功
                 List<PatientModel> items = (body.data == null) ? null : body.data.items;
                 boolean isEmpty = (items == null || items.isEmpty());
 

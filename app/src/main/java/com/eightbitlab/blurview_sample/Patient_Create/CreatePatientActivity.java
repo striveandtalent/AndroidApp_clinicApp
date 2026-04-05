@@ -24,10 +24,12 @@ import android.app.DatePickerDialog;
 import java.util.Calendar;
 import java.util.Locale;
 
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
 public class CreatePatientActivity extends AppCompatActivity {
 
     private EditText etName;
-    private EditText etGender;
     private EditText etBirthday;
     private EditText etAge;
     private EditText etPhone;
@@ -37,13 +39,19 @@ public class CreatePatientActivity extends AppCompatActivity {
     private EditText etMedicalHistory;
     private EditText etMasterPlan;
 
+    private RadioGroup rgGender;
+    private RadioButton rbMale;
+    private RadioButton rbFemale;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_patient);
 
         etName = findViewById(R.id.etName);
-        etGender = findViewById(R.id.etGender);
+        rgGender = findViewById(R.id.rgGender);
+        rbMale = findViewById(R.id.rbMale);
+        rbFemale = findViewById(R.id.rbFemale);
         etBirthday = findViewById(R.id.etBirthday);
         etAge = findViewById(R.id.etAge);
         etPhone = findViewById(R.id.etPhone);
@@ -118,7 +126,18 @@ public class CreatePatientActivity extends AppCompatActivity {
         // TODO：根据你后端 Create DTO 实际字段来
         CreatePatientRequest req = new CreatePatientRequest();
         req.name = name;
-        req.gender = etGender.getText().toString().trim();
+        int checkedId = rgGender.getCheckedRadioButtonId();
+        if (checkedId == R.id.rbMale) {
+            req.gender = "男";
+        } else if (checkedId == R.id.rbFemale) {
+            req.gender = "女";
+        } else {
+            req.gender = "";
+        }
+        if (req.gender == null || req.gender.trim().isEmpty()) {
+            Toast.makeText(this, "请选择性别", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         String bd = etBirthday.getText().toString().trim();
         int t = bd.indexOf('T');

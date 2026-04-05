@@ -5,5 +5,5 @@
     <string name="slogan">Strong slogan here</string>
     <string name="radius">Radius</string>
     <string name="search">搜索</string>
-    <string name="search_hint">搜索姓名</string>
+    <string name="search_hint">搜索任意档案信息</string>
 </resources>

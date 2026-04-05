@@ -40,7 +40,8 @@ public interface ApiService {
     // 病人档案
     // =========================
 
-
+    @GET("api/Patients")
+    Call<ReturnInfo<List<PatientModel>>> getPatients();
 
     @GET("api/Patients/search")
     Call<ReturnInfo<PageResult<PatientModel>>> searchPatients(
@@ -104,6 +105,7 @@ public interface ApiService {
     Call<ReturnInfo<List<VisitTreatmentRecordItemModel>>> listTreatmentRecords(
             @Query("visitNo") String visitNo
     );
+
 
     @POST("api/Record")
     Call<ReturnInfo<Object>> createTreatmentRecord(

@@ -88,6 +88,7 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
+                    <!-- 性别 -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -101,23 +102,51 @@
                             android:textSize="12sp"
                             android:textColor="#6B7280"/>
 
-                        <EditText
-                            android:id="@+id/etGender"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="48dp"
                             android:layout_marginTop="6dp"
                             android:background="@drawable/bg_input"
-                            android:padding="12dp"
-                            android:hint="男/女"
-                            android:inputType="text"
-                            android:textColor="#111827"
-                            android:textColorHint="#9CA3AF"/>
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp">
+
+                            <RadioGroup
+                                android:id="@+id/rgGender"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:baselineAligned="false">
+
+                                <RadioButton
+                                    android:id="@+id/rbMale"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minHeight="0dp"
+                                    android:text="男"
+                                    android:textColor="#111827"
+                                    android:buttonTint="#666666"/>
+
+                                <RadioButton
+                                    android:id="@+id/rbFemale"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:minHeight="0dp"
+                                    android:text="女"
+                                    android:textColor="#111827"
+                                    android:buttonTint="#666666"/>
+                            </RadioGroup>
+                        </LinearLayout>
                     </LinearLayout>
 
                     <View
                         android:layout_width="10dp"
                         android:layout_height="1dp"/>
 
+                    <!-- 年龄 -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -134,12 +163,14 @@
                         <EditText
                             android:id="@+id/etAge"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="48dp"
                             android:layout_marginTop="6dp"
                             android:background="@drawable/bg_input"
-                            android:padding="12dp"
+                            android:gravity="center_vertical"
                             android:hint="例如：25"
                             android:inputType="number"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
                             android:textColor="#111827"
                             android:textColorHint="#9CA3AF"/>
                     </LinearLayout>

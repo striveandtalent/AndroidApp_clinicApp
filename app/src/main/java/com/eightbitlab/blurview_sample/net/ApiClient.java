@@ -22,9 +22,9 @@ public class ApiClient {
 //    private static final String BASE_URL = "http://10.0.2.2:5219/";//模拟机本地连接
 //    private static final String BASE_URL = "http://192.168.101.10:6123/";//本地连接
 //    private static final String BASE_URL = "http://192.168.0.106:6123/";//IIS连接
-//    private static final String BASE_URL = "http://192.168.0.102:8080/";//IIS连接
+    private static final String BASE_URL = "http://192.168.0.103:8080/";//IIS连接
 //    private static final String BASE_URL = "https://119.84.246.217:45715/";//公网映射
-    private static final String BASE_URL = "https://frp-fee.com:50580/";
+//    private static final String BASE_URL = "https://frp-fee.com:50580/";
 
     public static String getBaseUrl() {
         return BASE_URL;
