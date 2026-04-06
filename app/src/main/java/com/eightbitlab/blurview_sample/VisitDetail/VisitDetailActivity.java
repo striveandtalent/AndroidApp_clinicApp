@@ -25,8 +25,6 @@ import com.eightbitlab.blurview_sample.net.ApiClient;
 import com.eightbitlab.blurview_sample.util.FileUriUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -269,19 +267,13 @@ public class VisitDetailActivity extends AppCompatActivity {
             }
         }
 
-        Collections.sort(followups, new Comparator<VisitTreatmentRecordItemModel>() {
-            @Override
-            public int compare(VisitTreatmentRecordItemModel o1, VisitTreatmentRecordItemModel o2) {
-                return compareDateDesc(o1 == null ? null : o1.recordTime, o2 == null ? null : o2.recordTime);
-            }
-        });
-
         if (initialRecord == null) {
             tvInitialAction.setText("+ 新增初诊");
             layoutInitialContainer.addView(createEmptyHint("暂无初诊记录"));
         } else {
             tvInitialAction.setText("编辑");
-            layoutInitialContainer.addView(createTreatmentRecordCard("初诊", initialRecord, false));
+            String title = buildInitialTitle(initialRecord);
+            layoutInitialContainer.addView(createTreatmentRecordCard(title, initialRecord, false));
         }
 
         final VisitTreatmentRecordItemModel finalInitialRecord = initialRecord;
@@ -302,9 +294,26 @@ public class VisitDetailActivity extends AppCompatActivity {
         } else {
             for (int i = 0; i < followups.size(); i++) {
                 VisitTreatmentRecordItemModel item = followups.get(i);
-                layoutFollowupContainer.addView(createTreatmentRecordCard("复诊" + (i + 1), item, true));
+                String title = buildFollowupTitle(item);
+                layoutFollowupContainer.addView(createTreatmentRecordCard(title, item, true));
             }
         }
+    }
+
+    private String buildInitialTitle(VisitTreatmentRecordItemModel item) {
+        String timeText = fmtMaybeDateTime(item == null ? null : item.recordTime);
+        if (isBlank(timeText)) {
+            return "初诊";
+        }
+        return "初诊 · " + timeText;
+    }
+
+    private String buildFollowupTitle(VisitTreatmentRecordItemModel item) {
+        String timeText = fmtMaybeDateTime(item == null ? null : item.recordTime);
+        if (isBlank(timeText)) {
+            return "复诊";
+        }
+        return "复诊 · " + timeText;
     }
 
     private View createTreatmentRecordCard(String title,
@@ -329,17 +338,7 @@ public class VisitDetailActivity extends AppCompatActivity {
         tvTitle.setTypeface(null, android.graphics.Typeface.BOLD);
         card.addView(tvTitle);
 
-        TextView tvTime = new TextView(this);
-        LinearLayout.LayoutParams timeLp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        timeLp.topMargin = dp(8);
-        tvTime.setLayoutParams(timeLp);
-        tvTime.setText("记录时间： " + showOrEmpty(fmtMaybeDateTime(item == null ? null : item.recordTime)));
-        tvTime.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
-        tvTime.setTextColor(0xFF6B7280);
-        card.addView(tvTime);
+
 
         TextView tvContent = new TextView(this);
         LinearLayout.LayoutParams contentLp = new LinearLayout.LayoutParams(
