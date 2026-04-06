@@ -76,7 +76,6 @@
                     android:layout_marginTop="6dp"
                     android:background="@drawable/bg_input"
                     android:padding="12dp"
-                    android:hint="例如：张三"
                     android:inputType="textPersonName"
                     android:textColor="#111827"
                     android:textColorHint="#9CA3AF"/>
@@ -167,7 +166,6 @@
                             android:layout_marginTop="6dp"
                             android:background="@drawable/bg_input"
                             android:gravity="center_vertical"
-                            android:hint="例如：25"
                             android:inputType="number"
                             android:paddingStart="12dp"
                             android:paddingEnd="12dp"
@@ -225,7 +223,6 @@
                     android:layout_marginTop="6dp"
                     android:background="@drawable/bg_input"
                     android:padding="12dp"
-                    android:hint="例如：5113xxxxxxxxxxxxxx"
                     android:inputType="text"
                     android:textColor="#111827"
                     android:textColorHint="#9CA3AF"/>
@@ -264,7 +261,6 @@
                     android:layout_marginTop="6dp"
                     android:background="@drawable/bg_input"
                     android:padding="12dp"
-                    android:hint="例如：138xxxxxx"
                     android:inputType="phone"
                     android:textColor="#111827"
                     android:textColorHint="#9CA3AF"/>
@@ -289,7 +285,6 @@
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:nestedScrollingEnabled="false"
-                    android:hint="例如：四川省成都市..."
                     android:textColor="#111827"
                     android:textColorHint="#9CA3AF"/>
             </LinearLayout>
@@ -331,7 +326,6 @@
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:nestedScrollingEnabled="false"
-                    android:hint="例如：青霉素过敏"
                     android:textColor="#111827"
                     android:textColorHint="#9CA3AF"/>
 
@@ -355,7 +349,6 @@
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:nestedScrollingEnabled="false"
-                    android:hint="例如：高血压、糖尿病..."
                     android:textColor="#111827"
                     android:textColorHint="#9CA3AF"/>
 
@@ -379,7 +372,6 @@
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:nestedScrollingEnabled="false"
-                    android:hint="例如：控制炎症，定期复诊..."
                     android:textColor="#111827"
                     android:textColorHint="#9CA3AF"/>
             </LinearLayout>

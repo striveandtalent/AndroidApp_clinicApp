@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:background="@android:color/transparent"
-            android:hint="请输入金额，例如 100"
+            android:hint="请输入金额"
             android:inputType="numberDecimal"
             android:padding="12dp"
             android:textColor="#111827"
