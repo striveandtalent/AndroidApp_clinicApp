@@ -2,7 +2,6 @@ package com.eightbitlab.blurview_sample;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -14,6 +13,12 @@ import androidx.annotation.Nullable;
 
 import com.eightbitlab.blurview_sample.net.ApiClient;
 import com.eightbitlab.blurview_sample.net.AppSettings;
+
+import com.eightbitlab.blurview_sample.ReturnInfo;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SettingFragment extends BaseFragment {
 
@@ -132,18 +137,83 @@ public class SettingFragment extends BaseFragment {
      * 当前先验证 ApiClient 是否已经按新的 baseUrl 重建成功
      */
     private void testConnection() {
-        if (getContext() == null) return;
+        if (!isAdded() || getContext() == null) return;
 
-        try {
-            ApiClient.reset(requireContext());
-            tvConnectionState.setText("已应用");
-            Toast.makeText(requireContext(),
-                    "当前地址：" + AppSettings.getBaseUrl(requireContext()),
-                    Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            tvConnectionState.setText("异常");
-            Toast.makeText(requireContext(), "连接配置失败：" + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+        itemTestConnection.setEnabled(false);
+        tvConnectionState.setText("检测中...");
+
+        ApiClient.reset(requireContext());
+
+        final long startMs = System.currentTimeMillis();
+
+        ApiClient.api(requireContext()).ping().enqueue(new Callback<ReturnInfo<Object>>() {
+            @Override
+            public void onResponse(Call<ReturnInfo<Object>> call, Response<ReturnInfo<Object>> response) {
+                if (!isAdded() || getContext() == null) return;
+
+                itemTestConnection.setEnabled(true);
+
+                long costMs = System.currentTimeMillis() - startMs;
+
+                if (response.isSuccessful() && response.body() != null) {
+                    ReturnInfo<Object> body = response.body();
+
+                    if (body.status == 0) {
+                        String msg = "连接正常 · " + costMs + "ms";
+                        tvConnectionState.setText(msg);
+
+//                        Toast.makeText(
+//                                requireContext(),
+//                                AppSettings.getCurrentEnvDisplayName(requireContext()) + "：" + msg,
+//                                Toast.LENGTH_SHORT
+//                        ).show();
+                    } else {
+                        String msg = "服务返回异常";
+                        if (body.message != null && !body.message.trim().isEmpty()) {
+                            msg = body.message.trim();
+                        }
+
+                        tvConnectionState.setText("连接异常");
+//                        Toast.makeText(
+//                                requireContext(),
+//                                "连接异常：" + msg,
+//                                Toast.LENGTH_SHORT
+//                        ).show();
+                    }
+                } else {
+                    tvConnectionState.setText("连接失败");
+//                    Toast.makeText(
+//                            requireContext(),
+//                            "连接失败：HTTP " + response.code(),
+//                            Toast.LENGTH_SHORT
+//                    ).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReturnInfo<Object>> call, Throwable t) {
+                if (!isAdded() || getContext() == null) return;
+
+                itemTestConnection.setEnabled(true);
+
+                String errorMsg = (t == null) ? "未知错误" : t.getMessage();
+                if (errorMsg == null || errorMsg.trim().isEmpty()) {
+                    errorMsg = "网络请求失败";
+                }
+
+                if (errorMsg.toLowerCase().contains("timeout")) {
+                    tvConnectionState.setText("连接超时");
+                } else {
+                    tvConnectionState.setText("连接失败");
+                }
+
+                Toast.makeText(
+                        requireContext(),
+                        "连接失败：" + errorMsg,
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+        });
     }
 
     private int dp(int value) {

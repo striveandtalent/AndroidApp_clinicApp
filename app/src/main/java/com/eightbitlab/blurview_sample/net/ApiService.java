@@ -122,4 +122,11 @@ public interface ApiService {
             @Query("id") long id,
             @Query("visitNo") String visitNo
     );
+
+    // =========================
+    // 健康检查
+    // =========================
+
+    @GET("api/Health/ping")
+    Call<ReturnInfo<Object>> ping();
 }
