@@ -154,7 +154,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="本地网络"
+                        android:text="本地"
                         android:textColor="#8C829D"
                         android:textSize="13sp" />
                 </LinearLayout>

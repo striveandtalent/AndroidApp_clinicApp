@@ -128,9 +128,8 @@ public class SettingFragment extends BaseFragment {
     }
 
     /**
-     * 先做一个最基础版本：
+     * 基础版本：
      * 当前先验证 ApiClient 是否已经按新的 baseUrl 重建成功
-     * 真正联网测试建议你后端加一个 /api/health 或 /ping 接口再调用
      */
     private void testConnection() {
         if (getContext() == null) return;

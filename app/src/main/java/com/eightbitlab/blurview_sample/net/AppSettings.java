@@ -18,7 +18,7 @@ public class AppSettings {
     public static final String ENV_LOCAL = "local";
     public static final String ENV_PUBLIC = "public";
 
-    private static final String DEFAULT_BASE_URL_LOCAL = "http://192.168.101.10:6123/";
+    private static final String DEFAULT_BASE_URL_LOCAL = "http://192.168.0.106:8080/";
     private static final String DEFAULT_BASE_URL_PUBLIC = "https://frp-fee.com:50580/";
 
     private static SharedPreferences sp(Context context) {
@@ -38,10 +38,10 @@ public class AppSettings {
         String env = getCurrentEnv(context);
         switch (env) {
             case ENV_LOCAL:
-                return "本地网络";
+                return "本地";
             case ENV_PUBLIC:
             default:
-                return "公网映射";
+                return "线上";
         }
     }
 
@@ -85,7 +85,6 @@ public class AppSettings {
                 editor.putString(KEY_BASE_URL_PUBLIC, normalized);
                 break;
         }
-
         editor.apply();
     }
 
