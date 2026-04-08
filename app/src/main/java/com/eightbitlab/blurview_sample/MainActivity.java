@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.eightbitlab.blurview_sample.PatientDetail.CaseFragment;
+import com.eightbitlab.blurview_sample.net.ApiClient;
 import com.google.android.material.tabs.TabLayout;
 
 import eightbitlab.com.blurview.BlurTarget;
@@ -47,17 +48,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ApiClient.init(getApplicationContext());
+
         initView();
         setupBlurView();
         setupViewPager();
         EdgeToEdge.enable(this);
 
-        // 这里保留系统 inset 回调，后续如果要适配全面屏/手势条，可在此扩展。
         ViewCompat.setOnApplyWindowInsetsListener(bottomBlurView, (v, windowInsets) -> {
             bottomBlurView.setPadding(0, 0, 0, 0);
             return windowInsets;
         });
-
     }
 
     private void initView() {

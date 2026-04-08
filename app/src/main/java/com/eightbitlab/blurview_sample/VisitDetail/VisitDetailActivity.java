@@ -907,7 +907,7 @@ public class VisitDetailActivity extends AppCompatActivity {
             return url;
         }
 
-        String baseUrl = ApiClient.getBaseUrl();
+        String baseUrl = ApiClient.getBaseUrl(this);
         if (isBlank(baseUrl)) return url;
 
         String base = baseUrl.endsWith("/") ? baseUrl.substring(0, baseUrl.length() - 1) : baseUrl;

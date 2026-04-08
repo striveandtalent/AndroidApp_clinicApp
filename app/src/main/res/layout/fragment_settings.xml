@@ -208,7 +208,7 @@
             </LinearLayout>
 
             <!-- 附件与缓存 -->
-            <LinearLayout
+            <!--<LinearLayout
                 android:id="@+id/cardCache"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -322,7 +322,7 @@
                         android:textColor="#8C829D"
                         android:textSize="13sp" />
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <!-- 关于 -->
             <LinearLayout

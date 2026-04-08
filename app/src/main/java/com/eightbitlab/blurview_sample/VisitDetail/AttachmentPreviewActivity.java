@@ -176,7 +176,7 @@ public class AttachmentPreviewActivity extends AppCompatActivity {
         tvRotate.setVisibility(View.VISIBLE);
         tvDownload.setVisibility(View.VISIBLE);
 
-        pagerAdapter = new AttachmentPreviewPagerAdapter(urlList);
+        pagerAdapter = new AttachmentPreviewPagerAdapter(this, urlList);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(currentIndex, false);
 
@@ -346,7 +346,7 @@ public class AttachmentPreviewActivity extends AppCompatActivity {
             return url;
         }
 
-        String baseUrl = ApiClient.getBaseUrl();
+        String baseUrl = ApiClient.getBaseUrl(this);
         if (baseUrl.endsWith("/") && url.startsWith("/")) {
             return baseUrl.substring(0, baseUrl.length() - 1) + url;
         } else if (!baseUrl.endsWith("/") && !url.startsWith("/")) {

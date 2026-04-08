@@ -1,5 +1,6 @@
 package com.eightbitlab.blurview_sample.VisitDetail;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,12 @@ import java.util.Map;
 
 public class AttachmentPreviewPagerAdapter extends RecyclerView.Adapter<AttachmentPreviewPagerAdapter.VH> {
 
+    private final Context context;
     private final List<String> imageUrls;
     private final Map<Integer, Float> rotationMap = new HashMap<>();
 
-    public AttachmentPreviewPagerAdapter(List<String> imageUrls) {
+    public AttachmentPreviewPagerAdapter(Context context, List<String> imageUrls) {
+        this.context = context.getApplicationContext();
         this.imageUrls = imageUrls == null ? new ArrayList<>() : imageUrls;
     }
 
@@ -86,7 +89,7 @@ public class AttachmentPreviewPagerAdapter extends RecyclerView.Adapter<Attachme
             return url;
         }
 
-        String baseUrl = ApiClient.getBaseUrl();
+        String baseUrl = ApiClient.getBaseUrl(context);
         if (baseUrl.endsWith("/") && url.startsWith("/")) {
             return baseUrl.substring(0, baseUrl.length() - 1) + url;
         } else if (!baseUrl.endsWith("/") && !url.startsWith("/")) {

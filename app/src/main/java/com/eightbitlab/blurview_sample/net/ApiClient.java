@@ -1,5 +1,7 @@
 package com.eightbitlab.blurview_sample.net;
 
+import android.content.Context;
+
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -16,31 +18,72 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
+
     private static ApiService api;
+    private static Retrofit retrofit;
+    private static String currentBaseUrl;
 
-    // 注意：最后一定加 /
-//    private static final String BASE_URL = "http://10.0.2.2:5219/";//模拟机本地连接
-//    private static final String BASE_URL = "http://192.168.101.10:6123/";//本地连接
-//    private static final String BASE_URL = "http://192.168.0.106:6123/";//IIS连接
-//    private static final String BASE_URL = "http://192.168.0.103:8080/";//IIS连接
-//    private static final String BASE_URL = "https://119.84.246.217:45715/";//公网映射
-    private static final String BASE_URL = "https://frp-fee.com:50580/";
-
-    public static String getBaseUrl() {
-        return BASE_URL;
+    /**
+     * 获取当前 BaseUrl（给图片预览、视频预览拼接地址用）
+     */
+    public static String getBaseUrl(Context context) {
+        return AppSettings.getBaseUrl(context);
     }
 
-    public static ApiService api() {
-        if (api != null) return api;
+    /**
+     * 兼容你原来部分调用方式：
+     * 但前提是先 init 过一次
+     */
+    public static String getBaseUrl() {
+        return currentBaseUrl == null ? "" : currentBaseUrl;
+    }
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+    /**
+     * 应用启动时可调用一次，也可以在首次请求时自动初始化
+     */
+    public static void init(Context context) {
+        String baseUrl = AppSettings.getBaseUrl(context);
+        if (api == null || retrofit == null || !baseUrl.equals(currentBaseUrl)) {
+            buildRetrofit(baseUrl);
+        }
+    }
+
+    /**
+     * 正常网络请求统一走这个
+     */
+    public static ApiService api(Context context) {
+        init(context);
+        return api;
+    }
+
+    /**
+     * 为了尽量少改你现有代码，保留旧方法
+     * 但建议后面逐步改成 api(context)
+     */
+    public static ApiService api() {
+        if (api == null) {
+            throw new IllegalStateException("ApiClient 尚未初始化，请先调用 ApiClient.init(context) 或 ApiClient.api(context)");
+        }
+        return api;
+    }
+
+    /**
+     * 当设置页改了服务器地址后，调用这个强制重建
+     */
+    public static void reset(Context context) {
+        buildRetrofit(AppSettings.getBaseUrl(context));
+    }
+
+    private static void buildRetrofit(String baseUrl) {
+        currentBaseUrl = baseUrl;
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
                 .client(getUnsafeOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         api = retrofit.create(ApiService.class);
-        return api;
     }
 
     public static OkHttpClient getUnsafeOkHttpClient() {
