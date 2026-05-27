@@ -209,7 +209,7 @@ public class SettingFragment extends BaseFragment {
 
                 Toast.makeText(
                         requireContext(),
-                        "连接失败：" + errorMsg,
+                        "连接失败",
                         Toast.LENGTH_SHORT
                 ).show();
             }
