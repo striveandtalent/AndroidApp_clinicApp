@@ -397,11 +397,86 @@
                         android:textSize="13sp" />
                 </LinearLayout>
 
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/itemDiagnosticInfo"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:background="@drawable/bg_setting_item"-->
+<!--                    android:minHeight="78dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:paddingStart="16dp"-->
+<!--                    android:paddingTop="14dp"-->
+<!--                    android:paddingEnd="16dp"-->
+<!--                    android:paddingBottom="14dp">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="诊断信息"-->
+<!--                            android:textColor="#2B2340"-->
+<!--                            android:textSize="15sp"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="查看"-->
+<!--                            android:textColor="#8E72DF"-->
+<!--                            android:textSize="14sp"-->
+<!--                            android:textStyle="bold" />-->
+<!--                    </LinearLayout>-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:text="查看当前网络与配置信息"-->
+<!--                        android:textColor="#8C829D"-->
+<!--                        android:textSize="13sp" />-->
+<!--                </LinearLayout>-->
+
+            </LinearLayout>
+
+            <!-- 账号 -->
+            <LinearLayout
+                android:id="@+id/cardAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_setting_card"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="账号"
+                    android:textColor="#231B35"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="登录状态与账号管理"
+                    android:textColor="#9589A8"
+                    android:textSize="12sp" />
+
+                <!-- 退出登录 -->
                 <LinearLayout
-                    android:id="@+id/itemDiagnosticInfo"
+                    android:id="@+id/itemLogout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/bg_setting_item"
                     android:minHeight="78dp"
                     android:orientation="vertical"
@@ -420,16 +495,16 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="诊断信息"
-                            android:textColor="#2B2340"
+                            android:text="退出登录"
+                            android:textColor="#E5484D"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="查看"
-                            android:textColor="#8E72DF"
+                            android:text="退出"
+                            android:textColor="#E5484D"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -438,9 +513,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="查看当前网络与配置信息"
+                        android:text="退出当前账号并返回登录页"
                         android:textColor="#8C829D"
                         android:textSize="13sp" />
+
                 </LinearLayout>
 
             </LinearLayout>

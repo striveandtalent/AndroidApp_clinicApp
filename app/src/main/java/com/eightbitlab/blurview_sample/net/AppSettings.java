@@ -18,8 +18,8 @@ public class AppSettings {
     public static final String ENV_LOCAL = "local";
     public static final String ENV_PUBLIC = "public";
 
-    private static final String DEFAULT_BASE_URL_LOCAL = "http://192.168.0.106:8080/";
-    private static final String DEFAULT_BASE_URL_PUBLIC = "https://frp-fee.com:50580/";
+    private static final String DEFAULT_BASE_URL_LOCAL = "http://192.168.0.110:6123/";
+    private static final String DEFAULT_BASE_URL_PUBLIC = "https://frp-gap.com:63807/";
 
     private static SharedPreferences sp(Context context) {
         return context.getApplicationContext()

@@ -1,5 +1,7 @@
 package com.eightbitlab.blurview_sample.net;
 
+import com.eightbitlab.blurview_sample.Login.LoginRequest;
+import com.eightbitlab.blurview_sample.Login.LoginResponse;
 import com.eightbitlab.blurview_sample.PatientDetail.PatientModel;
 import com.eightbitlab.blurview_sample.PatientDetail.VisitDetailModel;
 import com.eightbitlab.blurview_sample.PatientDetail.VisitSimpleModel;
@@ -39,7 +41,10 @@ public interface ApiService {
     // =========================
     // 系统登录
     // =========================
-
+    @POST("api/login")
+    Call<ReturnInfo<LoginResponse>> login(
+            @Body LoginRequest req
+    );
     // =========================
     // 病人档案
     // =========================

@@ -1,6 +1,7 @@
 package com.eightbitlab.blurview_sample;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.eightbitlab.blurview_sample.Login.LoginActivity;
+import com.eightbitlab.blurview_sample.Login.TokenManager;
 import com.eightbitlab.blurview_sample.net.ApiClient;
 import com.eightbitlab.blurview_sample.net.AppSettings;
 
@@ -47,8 +50,43 @@ public class SettingFragment extends BaseFragment {
         tvEnvironmentValue = view.findViewById(R.id.tvEnvironmentValue);
         tvConnectionState = view.findViewById(R.id.tvConnectionState);
 
+
+        LinearLayout itemLogout = view.findViewById(R.id.itemLogout);
+
         bindData();
         bindEvents();
+
+        itemLogout.setOnClickListener(v -> {
+
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("退出登录")
+                    .setMessage("确定退出当前账号吗？")
+
+                    .setNegativeButton("取消", null)
+
+                    .setPositiveButton("退出", (dialog, which) -> {
+
+                        // 清空Token
+                        TokenManager.clearToken(requireContext());
+
+                        // 跳转登录页
+                        Intent intent =
+                                new Intent(
+                                        requireContext(),
+                                        LoginActivity.class
+                                );
+
+                        // 清空任务栈
+                        intent.setFlags(
+                                Intent.FLAG_ACTIVITY_NEW_TASK
+                                        | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        );
+
+                        startActivity(intent);
+                    })
+
+                    .show();
+        });
     }
 
     @Override
@@ -131,6 +169,7 @@ public class SettingFragment extends BaseFragment {
                 "已切换到：" + AppSettings.getCurrentEnvDisplayName(requireContext()),
                 Toast.LENGTH_SHORT).show();
     }
+
 
     /**
      * 基础版本：

@@ -2,6 +2,8 @@ package com.eightbitlab.blurview_sample.net;
 
 import android.content.Context;
 
+import com.eightbitlab.blurview_sample.Login.TokenManager;
+
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -13,6 +15,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -111,7 +114,7 @@ public class ApiClient {
             HttpLoggingInterceptor log = new HttpLoggingInterceptor();
             log.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-            return new OkHttpClient.Builder()
+            /*return new OkHttpClient.Builder()
                     .addInterceptor(log)
                     .hostnameVerifier(new HostnameVerifier() {
                         @Override
@@ -120,8 +123,50 @@ public class ApiClient {
                         }
                     })
                     .sslSocketFactory(sslContext.getSocketFactory(), (X509TrustManager) trustAllCerts[0])
-                    .build();
+                    .build();*/
 
+            //所有请求自动带 Token
+            return new OkHttpClient.Builder()
+
+                    // 自动携带 Token
+                    .addInterceptor(chain -> {
+
+                        Request original = chain.request();
+
+                        String token =
+                                TokenManager.getToken(AppGlobals.getContext());
+
+                        Request.Builder builder =
+                                original.newBuilder();
+
+                        if (token != null && !token.isEmpty()) {
+
+                            builder.addHeader(
+                                    "Authorization",
+                                    "Bearer " + token
+                            );
+                        }
+
+                        return chain.proceed(builder.build());
+                    })
+
+                    // 日志
+                    .addInterceptor(log)
+
+                    // 忽略 HTTPS 证书（开发环境）
+                    .hostnameVerifier(new HostnameVerifier() {
+                        @Override
+                        public boolean verify(String hostname, SSLSession session) {
+                            return true;
+                        }
+                    })
+
+                    .sslSocketFactory(
+                            sslContext.getSocketFactory(),
+                            (X509TrustManager) trustAllCerts[0]
+                    )
+
+                    .build();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
