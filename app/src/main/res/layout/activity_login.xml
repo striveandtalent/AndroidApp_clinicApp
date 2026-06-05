@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F7FF">
+    android:background="@color/background_primary">
 
     <!-- 顶部欢迎区域 -->
     <LinearLayout
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="诊所管理系统"
-                android:textColor="#111827"
+                android:textColor="@color/input_text"
                 android:textSize="28sp"
                 android:textStyle="bold"/>
 
@@ -41,7 +41,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@android:drawable/ic_menu_manage"
-                app:tint="#6B7280" />
+                app:tint="@color/text_secondary" />
         </LinearLayout>
 
         <!-- 第二行 -->
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="欢迎使用，请登录"
-            android:textColor="#6B7280"
+            android:textColor="@color/text_secondary"
             android:textSize="14sp"/>
 
     </LinearLayout>
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="账号"
-            android:textColor="#6B7280"
+            android:textColor="@color/text_secondary"
             android:textSize="12sp"/>
 
         <EditText
@@ -89,8 +89,8 @@
             android:inputType="text"
             android:paddingStart="14dp"
             android:paddingEnd="14dp"
-            android:textColor="#111827"
-            android:textColorHint="#9CA3AF"/>
+            android:textColor="@color/input_text"
+            android:textColorHint="@color/input_hint"/>
 
         <!-- 密码 -->
         <TextView
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="密码"
-            android:textColor="#6B7280"
+            android:textColor="@color/text_secondary"
             android:textSize="12sp"/>
 
         <EditText
@@ -111,8 +111,8 @@
             android:inputType="textPassword"
             android:paddingStart="14dp"
             android:paddingEnd="14dp"
-            android:textColor="#111827"
-            android:textColorHint="#9CA3AF"/>
+            android:textColor="@color/input_text"
+            android:textColorHint="@color/input_hint"/>
 
         <!-- 记住登录 -->
         <CheckBox
@@ -122,7 +122,7 @@
             android:layout_marginTop="12dp"
             android:buttonTint="#4F46E5"
             android:text="记住登录状态"
-            android:textColor="#6B7280"
+            android:textColor="@color/text_secondary"
             android:textSize="13sp"/>
 
         <!-- 登录按钮 -->
@@ -147,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:text="Clinic Management v1.3"
-        android:textColor="#9CA3AF"
+        android:textColor="@color/text_tertiary"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

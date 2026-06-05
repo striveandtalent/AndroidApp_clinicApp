@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F7FF">
+    android:background="@color/background_primary">
 
     <!-- 顶部标题 -->
     <TextView
@@ -18,7 +18,7 @@
         android:text="更新病人档案"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#111827"
+        android:textColor="@color/input_text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -58,7 +58,7 @@
                     android:text="基础信息"
                     android:textStyle="bold"
                     android:textSize="15sp"
-                    android:textColor="#111827"/>
+                    android:textColor="@color/input_text"/>
 
                 <!-- 姓名 -->
                 <TextView
@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:text="姓名"
                     android:textSize="12sp"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginTop="10dp"/>
 
                 <EditText
@@ -77,8 +77,8 @@
                     android:background="@drawable/bg_input"
                     android:padding="12dp"
                     android:inputType="textPersonName"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
 
                 <!-- 性别 + 年龄 两列 -->
                 <LinearLayout
@@ -99,7 +99,7 @@
                             android:layout_height="wrap_content"
                             android:text="性别"
                             android:textSize="12sp"
-                            android:textColor="#6B7280"/>
+                            android:textColor="@color/text_secondary"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -125,7 +125,7 @@
                                     android:layout_height="wrap_content"
                                     android:minHeight="0dp"
                                     android:text="男"
-                                    android:textColor="#111827"
+                                    android:textColor="@color/input_text"
                                     android:buttonTint="#666666"/>
 
                                 <RadioButton
@@ -135,7 +135,7 @@
                                     android:layout_marginStart="20dp"
                                     android:minHeight="0dp"
                                     android:text="女"
-                                    android:textColor="#111827"
+                                    android:textColor="@color/input_text"
                                     android:buttonTint="#666666"/>
                             </RadioGroup>
                         </LinearLayout>
@@ -157,7 +157,7 @@
                             android:layout_height="wrap_content"
                             android:text="年龄"
                             android:textSize="12sp"
-                            android:textColor="#6B7280"/>
+                            android:textColor="@color/text_secondary"/>
 
                         <EditText
                             android:id="@+id/etAge"
@@ -169,8 +169,8 @@
                             android:inputType="number"
                             android:paddingStart="12dp"
                             android:paddingEnd="12dp"
-                            android:textColor="#111827"
-                            android:textColorHint="#9CA3AF"/>
+                            android:textColor="@color/input_text"
+                            android:textColorHint="@color/input_hint"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -180,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:text="出生日期"
                     android:textSize="12sp"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginTop="10dp"/>
 
                 <EditText
@@ -204,8 +204,8 @@
                     android:padding="12dp"
                     android:hint="例如：2000-03-24"
                     android:inputType="datetime|date"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>-->
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>-->
 
                 <!-- 身份证号 -->
                 <TextView
@@ -213,7 +213,7 @@
                     android:layout_height="wrap_content"
                     android:text="身份证号"
                     android:textSize="12sp"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginTop="10dp"/>
 
                 <EditText
@@ -224,8 +224,8 @@
                     android:background="@drawable/bg_input"
                     android:padding="12dp"
                     android:inputType="text"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
             </LinearLayout>
 
             <!-- 卡片2：联系与地址 -->
@@ -243,7 +243,7 @@
                     android:text="联系与地址"
                     android:textStyle="bold"
                     android:textSize="15sp"
-                    android:textColor="#111827"/>
+                    android:textColor="@color/input_text"/>
 
                 <!-- 电话 -->
                 <TextView
@@ -251,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:text="电话"
                     android:textSize="12sp"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginTop="10dp"/>
 
                 <EditText
@@ -262,8 +262,8 @@
                     android:background="@drawable/bg_input"
                     android:padding="12dp"
                     android:inputType="phone"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
 
                 <!-- 地址 -->
                 <TextView
@@ -271,7 +271,7 @@
                     android:layout_height="wrap_content"
                     android:text="地址"
                     android:textSize="12sp"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginTop="10dp"/>
 
                 <EditText
@@ -285,8 +285,8 @@
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:nestedScrollingEnabled="false"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
             </LinearLayout>
 
             <!-- 卡片3：病史与方案 -->
@@ -304,7 +304,7 @@
                     android:text="病史与方案"
                     android:textStyle="bold"
                     android:textSize="15sp"
-                    android:textColor="#111827"/>
+                    android:textColor="@color/input_text"/>
 
                 <!-- 过敏史 -->
                 <TextView
@@ -312,7 +312,7 @@
                     android:layout_height="wrap_content"
                     android:text="过敏史"
                     android:textSize="12sp"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginTop="10dp"/>
 
                 <EditText
@@ -326,8 +326,8 @@
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:nestedScrollingEnabled="false"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
 
                 <!-- 既往病史 -->
                 <TextView
@@ -335,7 +335,7 @@
                     android:layout_height="wrap_content"
                     android:text="既往病史"
                     android:textSize="12sp"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginTop="10dp"/>
 
                 <EditText
@@ -349,8 +349,8 @@
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:nestedScrollingEnabled="false"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
 
                 <!-- 总体治疗方针 -->
                 <TextView
@@ -358,7 +358,7 @@
                     android:layout_height="wrap_content"
                     android:text="总体治疗方针"
                     android:textSize="12sp"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginTop="10dp"/>
 
                 <EditText
@@ -372,8 +372,8 @@
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:nestedScrollingEnabled="false"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
             </LinearLayout>
 
             <!-- 给底部按钮留空间 -->

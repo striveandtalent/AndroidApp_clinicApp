@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F6F3FB">
+    android:background="@color/background_primary">
 
     <!-- 固定顶部，不参与滚动 -->
     <LinearLayout
@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="设置"
-            android:textColor="#20192F"
+            android:textColor="@color/text_primary"
             android:textSize="28sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="网络与服务器"
-                    android:textColor="#231B35"
+                    android:textColor="@color/text_primary"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -87,7 +87,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="服务器地址"
-                            android:textColor="#2B2340"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -95,7 +95,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="编辑"
-                            android:textColor="#8E72DF"
+                            android:textColor="@color/accent_purple"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -108,7 +108,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="http://192.168.0.106:6123/"
-                        android:textColor="#8C829D"
+                        android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -136,7 +136,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="当前环境"
-                            android:textColor="#2B2340"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -144,7 +144,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="切换"
-                            android:textColor="#8E72DF"
+                            android:textColor="@color/accent_purple"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -155,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="本地"
-                        android:textColor="#8C829D"
+                        android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -183,7 +183,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="测试连接"
-                            android:textColor="#2B2340"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -192,7 +192,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="未检测"
-                            android:textColor="#8E72DF"
+                            android:textColor="@color/accent_purple"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -202,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="检查当前服务器是否可访问"
-                        android:textColor="#8C829D"
+                        android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -221,7 +221,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="附件与缓存"
-                    android:textColor="#231B35"
+                    android:textColor="@color/text_primary"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -230,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="管理图片加载和本地缓存"
-                    android:textColor="#9589A8"
+                    android:textColor="@color/text_tertiary"
                     android:textSize="12sp" />
 
                 <LinearLayout
@@ -257,7 +257,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="仅 Wi-Fi 加载原图"
-                            android:textColor="#2B2340"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -266,7 +266,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="节省移动网络流量"
-                            android:textColor="#8C829D"
+                            android:textColor="@color/text_secondary"
                             android:textSize="13sp" />
                     </LinearLayout>
 
@@ -300,7 +300,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="清除图片缓存"
-                            android:textColor="#2B2340"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -309,7 +309,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="12.6 MB"
-                            android:textColor="#8E72DF"
+                            android:textColor="@color/accent_purple"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -319,7 +319,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="释放本地存储空间"
-                        android:textColor="#8C829D"
+                        android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>-->
@@ -338,7 +338,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="关于"
-                    android:textColor="#231B35"
+                    android:textColor="@color/text_primary"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -347,7 +347,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="应用版本与诊断信息"
-                    android:textColor="#9589A8"
+                    android:textColor="@color/text_tertiary"
                     android:textSize="12sp" />
 
                 <LinearLayout
@@ -374,7 +374,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="当前版本"
-                            android:textColor="#2B2340"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -383,7 +383,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="v1.0.0"
-                            android:textColor="#8E72DF"
+                            android:textColor="@color/accent_purple"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -393,7 +393,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="诊所 App 版本信息"
-                        android:textColor="#8C829D"
+                        android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -421,7 +421,7 @@
 <!--                            android:layout_height="wrap_content"-->
 <!--                            android:layout_weight="1"-->
 <!--                            android:text="诊断信息"-->
-<!--                            android:textColor="#2B2340"-->
+<!--                            android:textColor="@color/text_primary"-->
 <!--                            android:textSize="15sp"-->
 <!--                            android:textStyle="bold" />-->
 
@@ -429,7 +429,7 @@
 <!--                            android:layout_width="wrap_content"-->
 <!--                            android:layout_height="wrap_content"-->
 <!--                            android:text="查看"-->
-<!--                            android:textColor="#8E72DF"-->
+<!--                            android:textColor="@color/accent_purple"-->
 <!--                            android:textSize="14sp"-->
 <!--                            android:textStyle="bold" />-->
 <!--                    </LinearLayout>-->
@@ -439,7 +439,7 @@
 <!--                        android:layout_height="wrap_content"-->
 <!--                        android:layout_marginTop="8dp"-->
 <!--                        android:text="查看当前网络与配置信息"-->
-<!--                        android:textColor="#8C829D"-->
+<!--                        android:textColor="@color/text_secondary"-->
 <!--                        android:textSize="13sp" />-->
 <!--                </LinearLayout>-->
 
@@ -459,7 +459,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="账号"
-                    android:textColor="#231B35"
+                    android:textColor="@color/text_primary"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -468,7 +468,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="登录状态与账号管理"
-                    android:textColor="#9589A8"
+                    android:textColor="@color/text_tertiary"
                     android:textSize="12sp" />
 
                 <!-- 退出登录 -->
@@ -496,7 +496,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="退出登录"
-                            android:textColor="#E5484D"
+                            android:textColor="@color/accent_red"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -504,7 +504,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="退出"
-                            android:textColor="#E5484D"
+                            android:textColor="@color/accent_red"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -514,7 +514,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="退出当前账号并返回登录页"
-                        android:textColor="#8C829D"
+                        android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
                 </LinearLayout>

@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.eightbitlab.blurview_sample.R;
@@ -329,12 +330,12 @@ public class VisitDetailActivity extends AppCompatActivity {
         cardLp.topMargin = dp(8);
         card.setLayoutParams(cardLp);
         card.setPadding(dp(14), dp(14), dp(14), dp(14));
-        card.setBackgroundColor(0xFFF8FAFC);
+        card.setBackgroundColor(ContextCompat.getColor(this, R.color.background_card));
 
         TextView tvTitle = new TextView(this);
         tvTitle.setText(title);
         tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-        tvTitle.setTextColor(0xFF111827);
+        tvTitle.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
         tvTitle.setTypeface(null, android.graphics.Typeface.BOLD);
         card.addView(tvTitle);
 
@@ -349,7 +350,7 @@ public class VisitDetailActivity extends AppCompatActivity {
         tvContent.setLayoutParams(contentLp);
         tvContent.setText(showOrEmpty(item == null ? null : item.content));
         tvContent.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-        tvContent.setTextColor(0xFF111827);
+        tvContent.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
         tvContent.setLineSpacing(0, 1.2f);
         card.addView(tvContent);
 
@@ -362,7 +363,7 @@ public class VisitDetailActivity extends AppCompatActivity {
         tvFee.setLayoutParams(feeLp);
         tvFee.setText("单次金额： " + formatFee(item == null ? null : item.fee));
         tvFee.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        tvFee.setTextColor(0xFF2563EB);
+        tvFee.setTextColor(ContextCompat.getColor(this, R.color.accent_purple));
         card.addView(tvFee);
 
         card.setOnClickListener(v -> {
@@ -450,10 +451,10 @@ public class VisitDetailActivity extends AppCompatActivity {
         );
         tv.setLayoutParams(lp);
         tv.setPadding(dp(14), dp(14), dp(14), dp(14));
-        tv.setBackgroundColor(0xFFF8FAFC);
+        tv.setBackgroundColor(ContextCompat.getColor(this, R.color.background_card));
         tv.setText(text);
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        tv.setTextColor(0xFF6B7280);
+        tv.setTextColor(ContextCompat.getColor(this, R.color.text_secondary));
         return tv;
     }
 
@@ -582,8 +583,8 @@ public class VisitDetailActivity extends AppCompatActivity {
 
         int p = dp(12);
         tv.setPadding(p, p, p, p);
-        tv.setBackgroundColor(0xFFEEF2FF);
-        tv.setTextColor(0xFF374151);
+        tv.setBackgroundColor(ContextCompat.getColor(this, R.color.background_secondary));
+        tv.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         tv.setLineSpacing(0, 1.2f);
         tv.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
@@ -624,8 +625,8 @@ public class VisitDetailActivity extends AppCompatActivity {
         plus.setText("+");
         plus.setGravity(Gravity.CENTER);
         plus.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-        plus.setTextColor(0xFF111827);
-        plus.setBackgroundColor(0xFFF9FAFB);
+        plus.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
+        plus.setBackgroundColor(ContextCompat.getColor(this, R.color.input_background));
         plus.setPadding(dp(1), dp(1), dp(1), dp(1));
 
         plus.setOnClickListener(v -> {

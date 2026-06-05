@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F7FF">
+    android:background="@color/background_primary">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -17,7 +17,7 @@
         android:text="编辑病历"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#111827"
+        android:textColor="@color/input_text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="病情与方案"
-                    android:textColor="#111827"
+                    android:textColor="@color/input_text"
                     android:textSize="15sp"
                     android:textStyle="bold"/>
 
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="主诉"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:textSize="12sp"/>
 
                 <EditText
@@ -73,15 +73,15 @@
                     android:layout_marginTop="6dp"
                     android:background="@drawable/bg_input"
                     android:padding="12dp"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="现病史"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:textSize="12sp"/>
 
                 <EditText
@@ -93,15 +93,15 @@
                     android:gravity="top"
                     android:minLines="3"
                     android:padding="12dp"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="体征"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:textSize="12sp"/>
 
                 <EditText
@@ -113,15 +113,15 @@
                     android:gravity="top"
                     android:minLines="3"
                     android:padding="12dp"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="诊断"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:textSize="12sp"/>
 
                 <EditText
@@ -133,8 +133,8 @@
                     android:gravity="top"
                     android:minLines="3"
                     android:padding="12dp"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
             </LinearLayout>
 
             <!-- 治疗经过 -->
@@ -152,7 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="治疗经过"
-                    android:textColor="#111827"
+                    android:textColor="@color/input_text"
                     android:textSize="15sp"
                     android:textStyle="bold"/>
 
@@ -161,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="治疗效果（数字）"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:textSize="12sp"/>
 
                 <EditText
@@ -173,8 +173,8 @@
                     android:hint="例如：1 / 2 / 3 / 4"
                     android:inputType="number"
                     android:padding="12dp"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
             </LinearLayout>
 
             <!-- 医嘱 -->
@@ -192,7 +192,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="医嘱"
-                    android:textColor="#111827"
+                    android:textColor="@color/input_text"
                     android:textSize="15sp"
                     android:textStyle="bold"/>
 
@@ -205,8 +205,8 @@
                     android:gravity="top"
                     android:minLines="4"
                     android:padding="12dp"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
             </LinearLayout>
 
             <!-- 备注 -->
@@ -224,7 +224,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="备注"
-                    android:textColor="#111827"
+                    android:textColor="@color/input_text"
                     android:textSize="15sp"
                     android:textStyle="bold"/>
 
@@ -237,8 +237,8 @@
                     android:gravity="top"
                     android:minLines="4"
                     android:padding="12dp"
-                    android:textColor="#111827"
-                    android:textColorHint="#9CA3AF"/>
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint"/>
             </LinearLayout>
 
             <View
