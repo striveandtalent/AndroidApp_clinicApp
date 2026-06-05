@@ -28,12 +28,24 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * 病人档案详情页
+ * 职责：
+ * 1. 显示病人基本信息（姓名、性别、年龄等）
+ * 2. 显示病人就诊记录列表
+ * 3. 提供新增就诊记录入口
+ * 4. 点击病人信息卡片可编辑病人信息
+ */
 public class PatientDetailActivity extends AppCompatActivity {
 
+    /** 就诊记录列表 */
     private RecyclerView rvVisitRecords;
+    /** 就诊记录空状态布局 */
     private View layoutVisitRecordsEmpty;
+    /** 就诊记录适配器 */
     private VisitCardAdapter visitAdapter;
 
+    /** 病人基本信息显示控件 */
     private TextView tvName;
     private TextView tvGender;
     private TextView tvAge;
@@ -46,9 +58,12 @@ public class PatientDetailActivity extends AppCompatActivity {
     private TextView tvMasterPlan;
     private TextView tvPatientId;
 
+    /** 病人ID */
     private String patientId;
 
+    /** 编辑病人信息页面返回监听 */
     private ActivityResultLauncher<Intent> editPatientLauncher;
+    /** 创建就诊记录页面返回监听 */
     private ActivityResultLauncher<Intent> createVisitLauncher;
 
     @Override

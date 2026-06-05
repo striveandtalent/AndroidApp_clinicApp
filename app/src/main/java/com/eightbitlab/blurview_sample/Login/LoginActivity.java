@@ -24,11 +24,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * 登录界面
+ * 职责：
+ * 1. 检查本地是否有Token，有则直接跳转主页
+ * 2. 无Token则显示登录表单
+ * 3. 处理用户登录请求
+ * 4. 提供环境切换入口（开发调试用）
+ */
 public class LoginActivity extends AppCompatActivity {
+    /** 用户名输入框 */
     private EditText etUserName;
+    /** 密码输入框 */
     private EditText etPassword;
+    /** 登录按钮 */
     private Button btnLogin;
-
+    /** 记住登录状态复选框 */
     private CheckBox cbRemember;
 
     @Override
