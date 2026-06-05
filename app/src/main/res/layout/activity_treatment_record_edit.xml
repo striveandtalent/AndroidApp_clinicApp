@@ -40,73 +40,81 @@
             android:layout_height="1dp" />
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/svRoot"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/bg_card"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="记录时间"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <EditText
-            android:id="@+id/etRecordTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:background="@android:color/transparent"
-            android:hint="请选择记录时间"
-            android:padding="12dp"
-            android:textColor="@color/input_text"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="记录时间"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="内容"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
+            <EditText
+                android:id="@+id/etRecordTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@android:color/transparent"
+                android:hint="请选择记录时间"
+                android:padding="12dp"
+                android:textColor="@color/input_text"
+                android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/etContent"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginTop="6dp"
-            android:background="@android:color/transparent"
-            android:gravity="top|start"
-            android:hint="请输入本次记录内容"
-            android:inputType="textMultiLine"
-            android:padding="12dp"
-            android:textColor="@color/input_text"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="内容"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="单次金额"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
+            <EditText
+                android:id="@+id/etContent"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="6dp"
+                android:background="@android:color/transparent"
+                android:gravity="top|start"
+                android:hint="请输入本次记录内容"
+                android:inputType="textMultiLine"
+                android:padding="12dp"
+                android:textColor="@color/input_text"
+                android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/etFee"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:background="@android:color/transparent"
-            android:hint="请输入金额"
-            android:inputType="numberDecimal"
-            android:padding="12dp"
-            android:textColor="@color/input_text"
-            android:textSize="16sp" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="单次金额"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/etFee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@android:color/transparent"
+                android:hint="请输入金额"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:textColor="@color/input_text"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/btnSave"

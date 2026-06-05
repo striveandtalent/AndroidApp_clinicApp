@@ -17,7 +17,8 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".Login.LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,19 +34,23 @@
             android:exported="false" />
         <activity
             android:name=".VisitDetail.TreatmentRecordEditActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".VisitDetail.AttachmentPreviewActivity"
             android:exported="false" />
         <activity
             android:name=".VisitDetail.VisitEditActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".VisitDetail.VisitCreateActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".PatientDetail.PatientEditActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".VisitDetail.VisitDetailActivity"
             android:exported="false" />
@@ -55,7 +60,8 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Patient_Create.CreatePatientActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".MainActivity"
             android:exported="false">

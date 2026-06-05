@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.eightbitlab.blurview_sample.R;
 import com.eightbitlab.blurview_sample.ReturnInfo;
 import com.eightbitlab.blurview_sample.net.ApiClient;
+import com.eightbitlab.blurview_sample.util.KeyboardScrollHelper;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -45,6 +47,8 @@ public class TreatmentRecordEditActivity extends AppCompatActivity {
     private EditText etContent;
     private EditText etFee;
     private Button btnSave;
+    private ScrollView svRoot;
+    private KeyboardScrollHelper keyboardScrollHelper;
 
     private int mode;
     private String visitNo;
@@ -58,6 +62,7 @@ public class TreatmentRecordEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_treatment_record_edit);
 
         tvTitle = findViewById(R.id.tvTitle);
+        svRoot = findViewById(R.id.svRoot);
         etRecordTime = findViewById(R.id.etRecordTime);
         etContent = findViewById(R.id.etContent);
         etFee = findViewById(R.id.etFee);
@@ -72,6 +77,11 @@ public class TreatmentRecordEditActivity extends AppCompatActivity {
         etRecordTime.setOnClickListener(v -> pickDateTime());
         etRecordTime.setFocusable(false);
         etRecordTime.setClickable(true);
+
+        // 键盘弹出时自动滚动，保证输入框不被键盘遮挡
+        keyboardScrollHelper = new KeyboardScrollHelper(this, svRoot);
+        keyboardScrollHelper.registerEditText(etContent, etFee);
+        keyboardScrollHelper.attach();
 
         btnSave.setOnClickListener(v -> submit());
     }

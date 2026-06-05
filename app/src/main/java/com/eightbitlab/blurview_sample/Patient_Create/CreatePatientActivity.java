@@ -4,6 +4,7 @@ import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import com.eightbitlab.blurview_sample.PatientDetail.PatientDetailActivity;
 import com.eightbitlab.blurview_sample.R;
 import com.eightbitlab.blurview_sample.net.ApiClient;
 import com.eightbitlab.blurview_sample.ReturnInfo;
+import com.eightbitlab.blurview_sample.util.KeyboardScrollHelper;
 
 
 import retrofit2.Call;
@@ -42,12 +44,15 @@ public class CreatePatientActivity extends AppCompatActivity {
     private RadioGroup rgGender;
     private RadioButton rbMale;
     private RadioButton rbFemale;
+    private ScrollView svRoot;
+    private KeyboardScrollHelper keyboardScrollHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_patient);
 
+        svRoot = findViewById(R.id.svRoot);
         etName = findViewById(R.id.etName);
         rgGender = findViewById(R.id.rgGender);
         rbMale = findViewById(R.id.rbMale);
@@ -60,6 +65,12 @@ public class CreatePatientActivity extends AppCompatActivity {
         etAllergy = findViewById(R.id.etAllergy);
         etMedicalHistory = findViewById(R.id.etMedicalHistory);
         etMasterPlan = findViewById(R.id.etMasterPlan);
+
+        // 键盘弹出时自动滚动，保证输入框不被键盘遮挡
+        keyboardScrollHelper = new KeyboardScrollHelper(this, svRoot);
+        keyboardScrollHelper.registerEditText(etName, etAge, etPhone, etIdCard, etAddress,
+                etAllergy, etMedicalHistory, etMasterPlan);
+        keyboardScrollHelper.attach();
 
         findViewById(R.id.btnSave).setOnClickListener(v -> submit());
         //findViewById(R.id.btnCancel).setOnClickListener(v -> finish());

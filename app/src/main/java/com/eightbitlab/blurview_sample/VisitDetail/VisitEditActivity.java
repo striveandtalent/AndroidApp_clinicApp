@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.eightbitlab.blurview_sample.R;
 import com.eightbitlab.blurview_sample.ReturnInfo;
 import com.eightbitlab.blurview_sample.net.ApiClient;
+import com.eightbitlab.blurview_sample.util.KeyboardScrollHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +40,8 @@ public class VisitEditActivity extends AppCompatActivity {
     private EditText etRemark;
 
     private Button btnSave;
+    private ScrollView svRoot;
+    private KeyboardScrollHelper keyboardScrollHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,7 @@ public class VisitEditActivity extends AppCompatActivity {
     }
 
     private void bindViews() {
+        svRoot = findViewById(R.id.svRoot);
         groupIllness = findViewById(R.id.groupIllness);
         groupTreatmentProcess = findViewById(R.id.groupTreatmentProcess);
         groupDoctorAdvice = findViewById(R.id.groupDoctorAdvice);
@@ -80,6 +85,12 @@ public class VisitEditActivity extends AppCompatActivity {
         etRemark = findViewById(R.id.etRemark);
 
         btnSave = findViewById(R.id.btnSave);
+
+        // 键盘弹出时自动滚动，保证输入框不被键盘遮挡
+        keyboardScrollHelper = new KeyboardScrollHelper(this, svRoot);
+        keyboardScrollHelper.registerEditText(etChiefComplaint, etPresentIllness, etPhysicalSigns,
+                etDiagnosis, etTreatmentEffect, etDoctorAdvice, etRemark);
+        keyboardScrollHelper.attach();
     }
 
     private void initSectionUi() {

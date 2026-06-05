@@ -3,6 +3,7 @@ package com.eightbitlab.blurview_sample.VisitDetail;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.eightbitlab.blurview_sample.R;
 import com.eightbitlab.blurview_sample.ReturnInfo;
 import com.eightbitlab.blurview_sample.net.ApiClient;
+import com.eightbitlab.blurview_sample.util.KeyboardScrollHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +29,8 @@ public class VisitCreateActivity extends AppCompatActivity {
     private EditText etDoctorAdvice;
     private EditText etRemark;
     private Button btnSaveVisit;
+    private ScrollView svRoot;
+    private KeyboardScrollHelper keyboardScrollHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +44,19 @@ public class VisitCreateActivity extends AppCompatActivity {
             return;
         }
 
+        svRoot = findViewById(R.id.svRoot);
         etChiefComplaint = findViewById(R.id.etChiefComplaint);
         etPresentIllness = findViewById(R.id.etPresentIllness);
         etPhysicalSigns = findViewById(R.id.etPhysicalSigns);
         etDiagnosis = findViewById(R.id.etDiagnosis);
         etDoctorAdvice = findViewById(R.id.etDoctorAdvice);
         etRemark = findViewById(R.id.etRemark);
+
+        // 键盘弹出时自动滚动，保证输入框不被键盘遮挡
+        keyboardScrollHelper = new KeyboardScrollHelper(this, svRoot);
+        keyboardScrollHelper.registerEditText(etChiefComplaint, etPresentIllness, etPhysicalSigns,
+                etDiagnosis, etDoctorAdvice, etRemark);
+        keyboardScrollHelper.attach();
 
         btnSaveVisit = findViewById(R.id.btnSaveVisit);
         btnSaveVisit.setOnClickListener(v -> doSave());

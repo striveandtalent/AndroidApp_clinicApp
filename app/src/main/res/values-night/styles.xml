@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
@@ -5,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <!-- 白天模式：状态栏文字为深色 -->
-        <item name="android:windowLightStatusBar">true</item>
+        <!-- 夜间模式：状态栏文字为浅色 -->
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>
