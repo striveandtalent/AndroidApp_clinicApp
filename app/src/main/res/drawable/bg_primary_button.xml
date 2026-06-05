@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- iOS风格主按钮：大圆角 + 品牌色 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#2563EB"/>
+    <solid android:color="#007AFF"/>
     <corners android:radius="12dp"/>
 </shape>

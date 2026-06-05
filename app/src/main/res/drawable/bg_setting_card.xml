@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- iOS风格设置卡片：大圆角 + 白色背景 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="#FFFFFF" />
-    <corners android:radius="24dp" />
+    <corners android:radius="20dp" />
 </shape>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- iOS风格底部导航：胶囊形状 + 半透明白色背景 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-<!--    <solid android:color="#E6FFFFFF"/>  &lt;!&ndash; 自己调透明度 &ndash;&gt;-->
+    <solid android:color="#E6FFFFFF"/>
     <corners android:radius="35dp"/>
 </shape>

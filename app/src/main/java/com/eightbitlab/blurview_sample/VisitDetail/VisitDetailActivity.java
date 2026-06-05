@@ -36,45 +36,69 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * 就诊记录详情页
+ * 职责：
+ * 1. 显示就诊记录完整信息（主诉、现病史、体征、诊断等）
+ * 2. 显示初诊和复诊记录
+ * 3. 显示各类附件（检查报告、处方、其他附件）
+ * 4. 支持附件预览和删除
+ * 5. 支持编辑就诊信息
+ */
 public class VisitDetailActivity extends AppCompatActivity {
 
+    /** Intent传递参数常量 */
     public static final String EXTRA_VISIT_NO = "visitNo";
     public static final String EXTRA_SECTION = "section";
     public static final String EXTRA_PATIENT_ID = "patientId";
 
+    /** 可编辑的页面类型 */
     public static final int SECTION_ILLNESS = 1;
     public static final int SECTION_TREATMENT_PROCESS = 2;
     public static final int SECTION_DOCTOR_ADVICE = 3;
     public static final int SECTION_REMARK = 4;
 
+    /** 记录类型：初诊 */
     private static final int RECORD_TYPE_INITIAL = 1;
+    /** 记录类型：复诊 */
     private static final int RECORD_TYPE_FOLLOWUP = 2;
 
+    /** 就诊编号 */
     private String visitNo;
+    /** 病人ID */
     private String patientId;
 
+    /** 就诊基本信息显示 */
     private TextView tvVisitNo;
     private TextView tvVisitTime;
 
+    /** 病情信息显示 */
     private TextView tvChiefComplaint;
     private TextView tvPresentIllness;
     private TextView tvPhysicalSigns;
     private TextView tvDiagnosis;
+    
+    /** 检查报告附件 */
     private TextView tvReportAttachmentSummary;
     private GridLayout gridReportAttachments;
     private LinearLayout layoutReportFileFallback;
 
+    /** 初诊记录 */
     private TextView tvInitialAction;
     private LinearLayout layoutInitialContainer;
+    /** 复诊记录 */
     private TextView tvFollowupAction;
     private LinearLayout layoutFollowupContainer;
 
+    /** 处方附件 */
     private TextView tvPrescriptionAttachmentSummary;
     private GridLayout gridPrescriptionAttachments;
     private LinearLayout layoutPrescriptionFileFallback;
+    /** 治疗效果和费用 */
     private TextView tvTreatmentEffect;
     private TextView tvTotalFee;
 
+    /** 其他附件 */
     private TextView tvOtherAttachmentSummary;
     private GridLayout gridOtherAttachments;
     private LinearLayout layoutOtherFileFallback;

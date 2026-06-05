@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- iOS风格病例列表页：顶部模糊搜索框 + 列表内容 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_secondary">
 
     <!-- 病例页内采样容器：只采样当前页面内容，避免跨页面/跨层级问题 -->
     <eightbitlab.com.blurview.BlurTarget
@@ -14,22 +16,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- 病人列表 -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPatients"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:paddingHorizontal="12dp"
-                android:paddingTop="120dp" />
+                android:paddingHorizontal="16dp"
+                android:paddingTop="130dp"
+                android:paddingBottom="100dp" />
 
+            <!-- 空状态提示 -->
             <TextView
                 android:id="@+id/tvEmpty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="暂无数据"
+                android:textColor="@color/text_secondary"
+                android:textSize="16sp"
                 android:visibility="gone" />
 
+            <!-- 刷新按钮 -->
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabRefreshPatient"
                 android:layout_width="wrap_content"
@@ -38,9 +46,13 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="180dp"
                 android:contentDescription="刷新"
+                app:backgroundTint="@color/background_card"
+                app:borderWidth="0dp"
+                app:elevation="6dp"
                 app:srcCompat="@drawable/ic_refresh"
-                app:tint="@android:color/black" />
+                app:tint="@color/text_primary" />
 
+            <!-- 新增病人按钮 -->
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabAddPatient"
                 android:layout_width="wrap_content"
@@ -49,40 +61,45 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="90dp"
                 android:contentDescription="新增病人"
+                app:backgroundTint="@color/colorPrimary"
+                app:borderWidth="0dp"
+                app:elevation="6dp"
                 app:srcCompat="@android:drawable/ic_input_add"
-                app:tint="@android:color/black" />
+                app:tint="@color/background_card" />
 
         </FrameLayout>
 
 
     </eightbitlab.com.blurview.BlurTarget>
 
-    <!-- 顶部搜索框 BlurView：覆盖在内容之上，视觉上是玻璃态搜索栏 -->
+    <!-- 顶部搜索框 BlurView：iOS风格玻璃态效果 -->
     <eightbitlab.com.blurview.BlurView
         android:id="@+id/topBlurView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_search_round"
         android:clipToOutline="true"
-        android:elevation="16dp"
+        android:elevation="8dp"
         app:blurOverlayColor="@color/colorSearchBlurOverlay">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="44dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="12dp">
 
+            <!-- 搜索图标 -->
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:contentDescription="@string/search"
                 android:src="@android:drawable/ic_menu_search"
-                app:tint="@color/text_primary" />
+                app:tint="@color/text_secondary" />
 
+            <!-- 搜索输入框 -->
             <EditText
                 android:id="@+id/searchInput"
                 android:layout_width="0dp"
@@ -95,7 +112,8 @@
                 android:maxLines="1"
                 android:paddingStart="10dp"
                 android:textColor="@color/input_text"
-                android:textColorHint="@color/input_hint" />
+                android:textColorHint="@color/input_hint"
+                android:textSize="15sp" />
 
         </LinearLayout>
     </eightbitlab.com.blurview.BlurView>

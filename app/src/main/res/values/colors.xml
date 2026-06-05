@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00BCD4</color>
-    <color name="colorPrimaryDark">#0097A7</color>
-    <color name="colorAccent">#009688</color>
+    <!-- iOS风格主色调 -->
+    <color name="colorPrimary">#007AFF</color>
+    <color name="colorPrimaryDark">#0051D5</color>
+    <color name="colorAccent">#007AFF</color>
+    
+    <!-- 模糊效果覆盖层 -->
     <color name="colorOverlay">#78ffffff</color>
-    <color name="colorAccentOverlay">#1400bcd4</color>
+    <color name="colorAccentOverlay">#14007AFF</color>
     <color name="colorTransparentBlack">#14000000</color>
-    <color name="colorPrimaryTransparent">#6400bcd4</color>
+    <color name="colorPrimaryTransparent">#64007AFF</color>
     <color name="colorSearchBlurOverlay">#1AFFFFFF</color>
 
-    <!-- 白天模式文字颜色 -->
-    <color name="text_primary">#20192F</color>
-    <color name="text_secondary">#6B7280</color>
-    <color name="text_tertiary">#9CA3AF</color>
+    <!-- 白天模式文字颜色 - iOS风格 -->
+    <color name="text_primary">#1C1C1E</color>
+    <color name="text_secondary">#8E8E93</color>
+    <color name="text_tertiary">#AEAEB2</color>
 
-    <!-- 白天模式背景颜色 -->
+    <!-- 白天模式背景颜色 - iOS风格 -->
     <color name="background_primary">#FFFFFF</color>
-    <color name="background_secondary">#F5F5F5</color>
+    <color name="background_secondary">#F2F2F7</color>
     <color name="background_card">#FFFFFF</color>
 
-    <!-- 白天模式强调色 -->
-    <color name="accent_purple">#8E72DF</color>
-    <color name="accent_red">#E5484D</color>
+    <!-- 白天模式强调色 - iOS风格 -->
+    <color name="accent_purple">#AF52DE</color>
+    <color name="accent_red">#FF3B30</color>
 
-    <!-- 白天模式输入框 -->
-    <color name="input_background">#F5F5F5</color>
-    <color name="input_text">#111827</color>
-    <color name="input_hint">#9CA3AF</color>
+    <!-- 白天模式输入框 - iOS风格 -->
+    <color name="input_background">#F2F2F7</color>
+    <color name="input_text">#1C1C1E</color>
+    <color name="input_hint">#AEAEB2</color>
 
-    <!-- 白天模式分割线 -->
-    <color name="divider">#E5E5E5</color>
+    <!-- 白天模式分割线 - iOS风格 -->
+    <color name="divider">#C6C6C8</color>
 
     <!-- 白天模式覆盖层 -->
     <color name="overlay">#78000000</color>

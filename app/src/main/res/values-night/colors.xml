@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 夜间模式文字颜色 -->
+    <!-- 夜间模式文字颜色 - iOS风格 -->
     <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#B0B0B0</color>
-    <color name="text_tertiary">#808080</color>
+    <color name="text_secondary">#EBEBF0</color>
+    <color name="text_tertiary">#8E8E93</color>
     
-    <!-- 夜间模式背景颜色 -->
-    <color name="background_primary">#121212</color>
-    <color name="background_secondary">#1E1E1E</color>
-    <color name="background_card">#2D2D2D</color>
+    <!-- 夜间模式背景颜色 - iOS风格 -->
+    <color name="background_primary">#000000</color>
+    <color name="background_secondary">#1C1C1E</color>
+    <color name="background_card">#2C2C2E</color>
     
-    <!-- 夜间模式强调色 -->
-    <color name="accent_purple">#B388FF</color>
-    <color name="accent_red">#FF5252</color>
+    <!-- 夜间模式强调色 - iOS风格 -->
+    <color name="accent_purple">#BF5AF2</color>
+    <color name="accent_red">#FF453A</color>
     
-    <!-- 夜间模式输入框 -->
-    <color name="input_background">#2D2D2D</color>
+    <!-- 夜间模式输入框 - iOS风格 -->
+    <color name="input_background">#2C2C2E</color>
     <color name="input_text">#FFFFFF</color>
-    <color name="input_hint">#808080</color>
+    <color name="input_hint">#636366</color>
     
-    <!-- 夜间模式分割线 -->
-    <color name="divider">#404040</color>
+    <!-- 夜间模式分割线 - iOS风格 -->
+    <color name="divider">#38383A</color>
     
     <!-- 夜间模式覆盖层 -->
     <color name="overlay">#78000000</color>
